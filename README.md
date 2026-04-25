@@ -11,3 +11,5 @@ backend:
 
 frontend:
   open gl stuff
+
+  potentially add multithreading
