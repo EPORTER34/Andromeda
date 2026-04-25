@@ -1,8 +1,3 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include <cmath>
 
@@ -12,6 +7,6 @@
 int main()
 {
 	MainWindow app;
-	app.run();
+	app.run(); //rework so it doesn't run if the window didn't load properly
 	return 0;
 }
