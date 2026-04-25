@@ -37,10 +37,21 @@ void MainWindow::run()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clear screen
 
+        processInput();
+
         //render here
 
         glfwSwapBuffers(window); //swap rendering buffers
         glfwPollEvents(); //check for resize
+    }
+}
+
+void MainWindow::processInput()
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
+        glfwSetWindowShouldClose(window, true);
+        std::cout << "Simulation Terminated" << std::endl;
     }
 }
 

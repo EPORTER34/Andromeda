@@ -15,6 +15,7 @@ public:
     void run();
 private:
     GLFWwindow* window;
+    void processInput();
 };
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
