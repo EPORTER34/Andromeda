@@ -11,7 +11,6 @@ public:
     void render();
     unsigned int getVAO() const;
 private:
-    void generateSpheroid(float majorAxis, float minorAxis, std::initializer_list<float> color);
     void pushVertex(std::initializer_list<float> vertex, std::initializer_list<float> color);
     
     std::vector<float> vertices;

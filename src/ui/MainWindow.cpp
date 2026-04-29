@@ -87,6 +87,9 @@ void MainWindow::run()
        
         processInput();
 
+        //eventually for zoom in/out
+        //projection = glm::ortho(-2.0f, 2.0f, -2.0f, 2.0f, -2.0f, 2.0f);
+
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));    
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));    
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));

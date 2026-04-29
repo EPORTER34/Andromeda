@@ -10,47 +10,11 @@
 #include <cmath>
 #include <iostream>
 
-Spheroid::Spheroid(float majorAxis, float minorAxis, std::initializer_list<float> color)
-{
-    generateSpheroid(majorAxis, minorAxis, color);
-}
-
-void Spheroid::initialize()
-{
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-    glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(float), vertices.data(), GL_STATIC_DRAW);
-    glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(3*sizeof(float)));    
-    glEnableVertexAttribArray(1);
-
-    glGenBuffers(1, &EBO);  
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBuffer.size() * sizeof(unsigned int), indexBuffer.data(), GL_STATIC_DRAW);
-}
-
-Spheroid::~Spheroid()
-{
-    glDeleteBuffers(1, &VBO);
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &EBO);
-}
-
-
-void Spheroid::pushVertex(std::initializer_list<float> vertex, std::initializer_list<float> color)
-{
-    for(float x : vertex) vertices.push_back(x);
-    for(float x : color) vertices.push_back(x);
-}
 
 //generates the vertices for a spheroid of ellipses swept from the back to front of the screen
 //color is an rgb value to color the sphere
 //stores in vertices vector in format (x,y,z) + (r,g,b)
-void Spheroid::generateSpheroid(float majorAxis, float minorAxis, std::initializer_list<float> color)
+Spheroid::Spheroid(float majorAxis, float minorAxis, std::initializer_list<float> color)
 {
     float a = .5; //max radius in open gl coordinates
     float b = a*minorAxis/majorAxis;
@@ -112,6 +76,39 @@ void Spheroid::generateSpheroid(float majorAxis, float minorAxis, std::initializ
         indexBuffer.push_back(size - 1 - (i + 1) % ringSize);
     }
 }
+
+void Spheroid::initialize()
+{
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(float), vertices.data(), GL_STATIC_DRAW);
+    glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(3*sizeof(float)));    
+    glEnableVertexAttribArray(1);
+
+    glGenBuffers(1, &EBO);  
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBuffer.size() * sizeof(unsigned int), indexBuffer.data(), GL_STATIC_DRAW);
+}
+
+Spheroid::~Spheroid()
+{
+    glDeleteBuffers(1, &VBO);
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &EBO);
+}
+
+
+void Spheroid::pushVertex(std::initializer_list<float> vertex, std::initializer_list<float> color)
+{
+    for(float x : vertex) vertices.push_back(x);
+    for(float x : color) vertices.push_back(x);
+}
+
 
 void Spheroid::render()
 {
