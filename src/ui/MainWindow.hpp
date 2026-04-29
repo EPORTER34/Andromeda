@@ -6,6 +6,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
+#include "../util/Spheroid.hpp"
 
 class MainWindow
 {
@@ -16,6 +17,18 @@ public:
 private:
     GLFWwindow* window;
     void processInput();
+    unsigned int compileShader(unsigned int type, const char *source);
+    unsigned int createShaderProgram();
+    char* vertexShaderSource;
+    char* fragmentShaderSource;
+    unsigned int shaderProgram;
+    glm::mat4 model;    
+    glm::mat4 view;    
+    glm::mat4 projection;        
+    GLint modelLoc;    
+    GLint viewLoc;    
+    GLint projLoc; 
+    Spheroid earth;
 };
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
