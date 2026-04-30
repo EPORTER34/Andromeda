@@ -1,5 +1,5 @@
 #include "Spheroid.hpp"
-#include "constants.hpp"
+#include "../constants.hpp"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
