@@ -3,13 +3,12 @@
 
 #include <cmath>
 
-Satellite::Satellite(std::initializer_list<float> initialPosition, float orbitalRadius)
+Satellite::Satellite(float newRadius, float newInlincation, float newAscendingLongitude)
 {
-    centripAccel = G * MASS_EARTH / pow(orbitalRadius,2);  //g = a_c = G*M/r^2
-    float magVel = sqrt(centripAccel*orbitalRadius);       //v = sqrt(g*r)
+    netAngularVelocity = sqrt(G * MASS_EARTH / newRadius) * newRadius - EARTH_ANGULAR_VELOCITY;
 
-
-
-
-    for(int i = 0; i < 3; i++) position[i] = initialPosition.begin()[i];
+    orbitalRadius = newRadius;
+    inclination = newInlincation;
+    ascendingLongitude = newAscendingLongitude;
+    trueAnomoly = 0; //might add seperate constructor to set initial anomoly
 }
