@@ -2,7 +2,7 @@
 3d simulator for a satellite network the plots satellite orbits & simulates communications between the ground and sattelites
 will contain a preset of a LEO, MEO, & GEO sat network & the option to custom load a network
 
-todo:
+todo: <br>
 backend:
   sat obrital mechanics
     tle parsing
