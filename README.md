@@ -5,9 +5,14 @@ will contain a preset of a LEO, MEO, & GEO sat network & the option to custom lo
 todo:
 backend:
   sat obrital mechanics
+    tle parsing
+    sgp4 propogation
   ground to sat comm
     doppler effect compensation
     link budget analysis
+      path loss/SNR
+    multipath/fading
+  
 
 frontend:
   open gl stuff
