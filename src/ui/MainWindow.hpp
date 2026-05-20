@@ -34,9 +34,9 @@ private:
     Spheroid earth;
 
     Simulation sim;
-    int time;
 
     friend void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    friend void setSimTime(MainWindow* UI, float newTime);
 };
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);

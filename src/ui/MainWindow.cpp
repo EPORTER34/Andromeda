@@ -1,9 +1,14 @@
 #include "MainWindow.hpp"
 
-//function to handle keyboard inputs
+void setSimTime(MainWindow* UI, float newTime)
+{
+    UI->sim.setTimeStep(newTime);
+    std::cout << "Time Step Changed to " << newTime << "s" << std::endl;
+}
+
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    MainWindow* ui = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
+    MainWindow* UI = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
 
     if(action == GLFW_PRESS)
     {
@@ -14,30 +19,25 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
             std::cout << "Simulation Terminated" << std::endl;
             break;
         case GLFW_KEY_1:
-            ui->sim.setTimeStep(1);
-            std::cout << "Time Step Changed to 1s" << std::endl;
+            setSimTime(UI, 1);
             break;
         case GLFW_KEY_2:
-            ui->sim.setTimeStep(10);
-            std::cout << "Time Step Changed to 10s" << std::endl;
+            setSimTime(UI, 10);
             break;
         case GLFW_KEY_3:
-            ui->sim.setTimeStep(100);
-            std::cout << "Time Step Changed to 100s" << std::endl;
+            setSimTime(UI, 100);
             break;
         case GLFW_KEY_4:
-            ui->sim.setTimeStep(1000);
-            std::cout << "Time Step Changed to 1000s" << std::endl;
+            setSimTime(UI, 1000);
             break;
         case GLFW_KEY_5:
-            ui->sim.setTimeStep(10000);
-            std::cout << "Time Step Changed to 10000s" << std::endl;
+            setSimTime(UI, 10000);
             break;
         }
     }
 }
 
-//earth radii equator: 6378km  poles: 6357km
+//earth radii:: equator: 6378km  poles: 6357km
 MainWindow::MainWindow() : earth(6378, 6357, {.0f,.0f,1.0f })
 {
     //Open GL window setup
@@ -105,7 +105,8 @@ MainWindow::MainWindow() : earth(6378, 6357, {.0f,.0f,1.0f })
 
     glClearColor(0.0f,.0f,.0f,1.0f);  
     
-    earth.initialize();
+    earth.initializeGlBuffers();
+
     glfwSetKeyCallback(window, keyCallback);
     glfwSetWindowUserPointer(window, this);
 }
@@ -147,7 +148,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0,0,width,height);
 }
 
-
 unsigned int MainWindow::compileShader(unsigned int type, const char *source)
 {
 	unsigned int id = glCreateShader(type);
@@ -166,7 +166,6 @@ unsigned int MainWindow::compileShader(unsigned int type, const char *source)
 
 	return id;
 }
-
 
 unsigned int MainWindow::createShaderProgram()
 {
