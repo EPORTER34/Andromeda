@@ -43,12 +43,15 @@ void Satellite::updatePosition(float timeStep, float earthAngle)
     trueAnomaly += orbitalAngularVelocity * timeStep;
 
     float ECI[2]; //temporary array for ECI coodinates (no z)
+    float cosV = cos(trueAnomaly), sinV = sin(trueAnomaly);
+    
     //standard inclined circular orbit equations for ECI
-    ECI[0] = orbitalRadius * (cosO * cos(trueAnomaly) - sinO * sin(trueAnomaly) * cosI);
-    ECI[1] = orbitalRadius * (sinO * cos(trueAnomaly) + cosO * sin(trueAnomaly) * cosI);
+    ECI[0] = orbitalRadius * (cosO * cosV - sinO * sinV * cosI);
+    ECI[1] = orbitalRadius * (sinO * cosV + cosO * sinV * cosI);
 
     //conversion to ECEF
-    position[0] = ECI[0] * cos(earthAngle) + ECI[1] * sin(earthAngle);
-    position[1] = -ECI[0] * sin(earthAngle) + ECI[1] * cos(earthAngle); 
-    position[2] = orbitalRadius * sin(trueAnomaly) * sinI;
+    float cosT = cos(earthAngle), sinT = sin(earthAngle);
+    position[0] = ECI[0] * cosT + ECI[1] * sinT;
+    position[1] = -ECI[0] * sinT + ECI[1] * cosT; 
+    position[2] = orbitalRadius * sinV * sinI;
 }

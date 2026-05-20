@@ -119,7 +119,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::run()
 {
-
     while(!glfwWindowShouldClose(window))
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clear screen
@@ -135,7 +134,6 @@ void MainWindow::run()
         glUseProgram(shaderProgram);
 
         earth.render();
-
 
         glfwSwapBuffers(window); //swap rendering buffers
         glfwPollEvents(); //check for resize
