@@ -87,6 +87,8 @@ void MainWindow::run()
        
         processInput();
 
+        sim.runTimeStep();
+
         //eventually for zoom in/out
         //projection = glm::ortho(-2.0f, 2.0f, -2.0f, 2.0f, -2.0f, 2.0f);
 

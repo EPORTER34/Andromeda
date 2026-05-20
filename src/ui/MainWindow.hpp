@@ -6,7 +6,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
+
+#include "../sim/Sim.hpp"
 #include "../util/Spheroid/Spheroid.hpp"
+
 
 class MainWindow
 {
@@ -28,7 +31,10 @@ private:
     GLint modelLoc;    
     GLint viewLoc;    
     GLint projLoc; 
+
     Spheroid earth;
+
+    Simulation sim;
 };
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
