@@ -1,0 +1,5 @@
+rm -rf build                                    //clears the build file
+cmake -S . -B build && cmake --build build      //run first to actually build the program
+
+cmake --build build --target run                //run the main app
+cmake --build build --target run_tests          //run specifically tests
