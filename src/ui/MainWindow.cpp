@@ -1,5 +1,41 @@
 #include "MainWindow.hpp"
 
+//function to handle keyboard inputs
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    MainWindow* ui = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
+
+    if(action == GLFW_PRESS)
+    {
+        switch(key)
+        {
+        case GLFW_KEY_ESCAPE:
+            glfwSetWindowShouldClose(window, true);
+            std::cout << "Simulation Terminated" << std::endl;
+            break;
+        case GLFW_KEY_1:
+            ui->sim.setTimeStep(1);
+            std::cout << "Time Step Changed to 1s" << std::endl;
+            break;
+        case GLFW_KEY_2:
+            ui->sim.setTimeStep(10);
+            std::cout << "Time Step Changed to 10s" << std::endl;
+            break;
+        case GLFW_KEY_3:
+            ui->sim.setTimeStep(100);
+            std::cout << "Time Step Changed to 100s" << std::endl;
+            break;
+        case GLFW_KEY_4:
+            ui->sim.setTimeStep(1000);
+            std::cout << "Time Step Changed to 1000s" << std::endl;
+            break;
+        case GLFW_KEY_5:
+            ui->sim.setTimeStep(10000);
+            std::cout << "Time Step Changed to 10000s" << std::endl;
+            break;
+        }
+    }
+}
 
 //earth radii equator: 6378km  poles: 6357km
 MainWindow::MainWindow() : earth(6378, 6357, {.0f,.0f,1.0f })
@@ -70,6 +106,8 @@ MainWindow::MainWindow() : earth(6378, 6357, {.0f,.0f,1.0f })
     glClearColor(0.0f,.0f,.0f,1.0f);  
     
     earth.initialize();
+    glfwSetKeyCallback(window, keyCallback);
+    glfwSetWindowUserPointer(window, this);
 }
 
 MainWindow::~MainWindow()   
@@ -84,8 +122,6 @@ void MainWindow::run()
     while(!glfwWindowShouldClose(window))
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clear screen
-       
-        processInput();
 
         sim.runTimeStep();
 
@@ -102,15 +138,6 @@ void MainWindow::run()
 
         glfwSwapBuffers(window); //swap rendering buffers
         glfwPollEvents(); //check for resize
-    }
-}
-
-void MainWindow::processInput()
-{
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-    {
-        glfwSetWindowShouldClose(window, true);
-        std::cout << "Simulation Terminated" << std::endl;
     }
 }
 

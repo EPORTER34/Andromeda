@@ -4,8 +4,8 @@
 Simulation::Simulation()
 {
     earthAngle = 0;
-    timeStep = 1; //1 second time step
-    
+    timeStep = 100;
+
 }
 
 void Simulation::runTimeStep()
@@ -15,4 +15,9 @@ void Simulation::runTimeStep()
     {
         satellites[i].updatePosition(timeStep, earthAngle);
     }
+}
+
+void Simulation::setTimeStep(float newTimeStep)
+{
+    timeStep = newTimeStep;
 }

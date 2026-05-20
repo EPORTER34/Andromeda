@@ -19,7 +19,6 @@ public:
     void run();
 private:
     GLFWwindow* window;
-    void processInput();
     unsigned int compileShader(unsigned int type, const char *source);
     unsigned int createShaderProgram();
     char* vertexShaderSource;
@@ -35,6 +34,9 @@ private:
     Spheroid earth;
 
     Simulation sim;
+    int time;
+
+    friend void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 };
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
