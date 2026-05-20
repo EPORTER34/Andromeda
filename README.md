@@ -2,14 +2,19 @@
 3d simulator for a satellite network the plots satellite orbits & simulates communications between the ground and sattelites
 will contain a preset of a LEO, MEO, & GEO sat network & the option to custom load a network
 
-todo:
-backend:
-  sat obrital mechanics
-  ground to sat comm
-    doppler effect compensation
-    link budget analysis
+todo: <br>
+backend: <br>
+  -sat obrital mechanics <br>
+    -tle parsing <br>
+    -sgp4 propogation <br>
+  -ground to sat comm <br>
+    -doppler effect compensation <br>
+    -link budget analysis <br>
+    -path loss/SNR <br>
+  -multipath/fading <br>
+  
 
-frontend:
-  open gl stuff
+frontend: <br>
+  open gl stuff <br>
 
   potentially add multithreading
