@@ -1,7 +1,6 @@
 #pragma once
 
-const double G = 6.67408e-11; //gravitational constant [m^3*kg^-1*s^-2]
-const double MASS_EARTH = 5.972e24; //earth's mass [kg]
-const double PI = 3.141592653589; //PI
-const double EARTH_ANGULAR_VELOCITY = 72.722e-6; //angular rotation of the earth [rad/s]
-const double C = 2.99e8; //speed of light [m/s]
+constexpr double MU_EARTH = 3.986004418e14; //earth gravitational parameter [m^3/s^2]
+constexpr double PI = 3.14159265358979323846264338327950288;; //PI
+constexpr double EARTH_ANGULAR_VELOCITY = 72.921159e-6; //angular rotation of the earth [rad/s]
+constexpr double C = 299792458.0; //speed of light [m/s]

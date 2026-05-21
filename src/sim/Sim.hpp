@@ -13,7 +13,7 @@ private:
     std::vector<Satellite> satellites;
 
     float timeStep;
-    float earthAngle;
+    double time;
 };
 
 //things to go in simulation
