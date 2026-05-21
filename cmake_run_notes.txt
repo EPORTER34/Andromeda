@@ -3,3 +3,6 @@ cmake -S . -B build && cmake --build build      //run first to actually build th
 
 cmake --build build --target run                //run the main app
 cmake --build build --target run_tests          //run specifically tests
+
+
+./build/tests                                   //explicitly runs tests
