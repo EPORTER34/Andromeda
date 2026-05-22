@@ -3,32 +3,28 @@
 
 #include <cmath>
 
-
 //angles are in radians
 //prograde orbits: 0 < I < PI/2
 //polar orbit: I = PI/2
 //retrograde orbits: PI/2 < I < PI
 Satellite::Satellite(double newRadius, double newInlination, double newAscendingLongitude)
 {
-    orbitalAngularVelocity = sqrt(MU_EARTH / pow(newRadius,3));
-    orbitalRadius = newRadius;
-    inclination = newInlination;
-    ascendingLongitude = newAscendingLongitude;
+    initializeSatellite(newRadius, newInlination, newAscendingLongitude);
     initialAnomaly = 0;
-
-    cosO = cos(ascendingLongitude);
-    sinO = sin(ascendingLongitude);
-    cosI = cos(inclination);
-    sinI = sin(inclination);
 }
 Satellite::Satellite(double newRadius, double newInlination, double newAscendingLongitude, double newAnomaly)
 {
-    orbitalAngularVelocity = sqrt(MU_EARTH / pow(newRadius,3));
+    initializeSatellite(newRadius, newInlination, newAscendingLongitude);
+    initialAnomaly = newAnomaly;
+}
+
+void Satellite::initializeSatellite(double newRadius, double newInlination, double newAscendingLongitude)
+{  
     orbitalRadius = newRadius;
     inclination = newInlination;
     ascendingLongitude = newAscendingLongitude;
-    initialAnomaly = newAnomaly;
-
+    
+    orbitalAngularVelocity = sqrt(MU_EARTH / pow(newRadius,3));
     cosO = cos(ascendingLongitude);
     sinO = sin(ascendingLongitude);
     cosI = cos(inclination);
