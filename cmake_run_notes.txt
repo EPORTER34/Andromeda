@@ -5,4 +5,5 @@ cmake --build build --target run                //run the main app
 cmake --build build --target run_tests          //run specifically tests
 
 
+./build/SAT_NETWORK_SIM
 ./build/tests                                   //explicitly runs tests

@@ -8,43 +8,34 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <cmath>
-#include <iostream>
-
 
 Spheroid::Spheroid(float majorAxis, float minorAxis, std::initializer_list<float> color)
 {
-    std::vector<int> ringStarts = initializeVertices(majorAxis, minorAxis, color);
-    initializeIndexBuffer(ringStarts);
+    std::vector<int> ringStarts = generateVertices(majorAxis, minorAxis, color);
+    generateIndexBuffer(ringStarts);
 }
 
-//generates a vertex buffer by tracing out circles along an elliptical path
 //vertices in format (x,y,z) + (r,g,b)
-std::vector<int> Spheroid::initializeVertices(float majorAxis, float minorAxis, std::initializer_list<float> color)
+std::vector<int> Spheroid::generateVertices(float majorAxis, float minorAxis, std::initializer_list<float> color)
 {
-    //axes in openGL coordinates
-    float major = .5;
-    float minor = major * minorAxis / majorAxis;
+    float glMajor = .5;
+    float glMinor = glMajor * minorAxis / majorAxis;
 
     std::vector<int> ringStarts;
 
     //front point
     ringStarts.push_back(0);
-    pushVertex({major,0,0}, color);
+    pushVertex({glMajor,0,0}, color);
 
     for(float v = PI/24; v < PI; v += PI/24)
     {
         ringStarts.push_back(vertices.size() / 6);
-        for(float theta = 0; theta < 2*PI; theta += PI/12)
-        {
-            float r = minor*sin(v);
-
-            pushVertex({major*(float)cos(v), r*(float)cos(theta), r*(float)sin(theta)}, {color.begin()[0], 1 - theta/(2*(float)PI), color.begin()[2]});
-        }
+        generateRing(glMajor, glMinor, v, color);
     }
 
     //back point
     ringStarts.push_back(vertices.size() / 6);
-    pushVertex({-major,0,0}, color);
+    pushVertex({-glMajor,0,0}, color);
 
     return ringStarts;
 }
@@ -55,14 +46,17 @@ void Spheroid::pushVertex(std::initializer_list<float> vertex, std::initializer_
     for(float x : color) vertices.push_back(x);
 }
 
-//generates an index buffer of triangles for the gpu to render
-//
-//      1 - - - 3   3\       
-//      |     /     |   \
-//      |  /        |      \
-//      2/          4 - - - 5
-//
-void Spheroid::initializeIndexBuffer(std::vector<int> ringStarts)
+void Spheroid::generateRing(float glMajor, float glMinor, float v, std::initializer_list<float> color)
+{
+    float r = glMinor*sin(v);
+    for(float theta = 0; theta < 2*PI; theta += PI/12)
+    {  
+        pushVertex({glMajor*(float)cos(v), r*(float)cos(theta), r*(float)sin(theta)}, 
+                   {color.begin()[0], 1 - theta/(2*(float)PI), color.begin()[2]});
+    }
+}
+
+void Spheroid::generateIndexBuffer(std::vector<int> ringStarts)
 {
     int ringSize = ringStarts[2] - ringStarts[1];
 
@@ -128,9 +122,4 @@ void Spheroid::render()
 {
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, indexBuffer.size(), GL_UNSIGNED_INT, 0);
-}
-
-unsigned int Spheroid::getVAO() const
-{
-    return VAO;
 }

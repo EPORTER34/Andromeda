@@ -5,7 +5,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <iostream>
 
 #include "../sim/Sim.hpp"
 #include "../util/Spheroid/Spheroid.hpp"
@@ -17,6 +16,7 @@ public:
     MainWindow();
     ~MainWindow();
     void run();
+    void setSimSpeed(float newSpeed);
 private:
     GLFWwindow* window;
     unsigned int compileShader(unsigned int type, const char *source);
@@ -34,9 +34,6 @@ private:
     Spheroid earth;
 
     Simulation sim;
-
-    friend void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-    friend void setSimTime(MainWindow* UI, float newTime);
 };
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);

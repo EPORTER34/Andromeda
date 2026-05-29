@@ -1,9 +1,11 @@
 #include "MainWindow.hpp"
 
-void setSimTime(MainWindow* UI, float newTime)
+#include <iostream>
+
+void MainWindow::setSimSpeed(float newSpeed)
 {
-    UI->sim.setTimeStep(newTime);
-    std::cout << "Time Step Changed to " << newTime << "s" << std::endl;
+    sim.setTimeStep(newSpeed);
+    std::cout << "Time Step Changed to " << newSpeed << "s" << std::endl;
 }
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -19,19 +21,19 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
             std::cout << "Simulation Terminated" << std::endl;
             break;
         case GLFW_KEY_1:
-            setSimTime(UI, 1);
+            UI->setSimSpeed(1);
             break;
         case GLFW_KEY_2:
-            setSimTime(UI, 10);
+            UI->setSimSpeed(10);
             break;
         case GLFW_KEY_3:
-            setSimTime(UI, 100);
+            UI->setSimSpeed(100);
             break;
         case GLFW_KEY_4:
-            setSimTime(UI, 1000);
+            UI->setSimSpeed(1000);
             break;
         case GLFW_KEY_5:
-            setSimTime(UI, 10000);
+            UI->setSimSpeed(10000);
             break;
         }
     }

@@ -9,12 +9,12 @@ public:
     void initializeGlBuffers();
     ~Spheroid();
     void render();
-    unsigned int getVAO() const;
 
 private:
-    std::vector<int> initializeVertices(float majorAxis, float minorAxis, std::initializer_list<float> color);
+    std::vector<int> generateVertices(float majorAxis, float minorAxis, std::initializer_list<float> color);
     void pushVertex(std::initializer_list<float> vertex, std::initializer_list<float> color);
-    void initializeIndexBuffer(std::vector<int> ringStarts);
+    void generateRing(float glMajor, float glMinor, float v, std::initializer_list<float> color);
+    void generateIndexBuffer(std::vector<int> ringStarts);
     
     std::vector<float> vertices;
     std::vector<unsigned int> indexBuffer;
