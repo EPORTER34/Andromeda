@@ -14,6 +14,7 @@
                 "${workspaceFolder}/src/glad.c",
                 "${workspaceFolder}/src/ui/*.cpp",
                 "${workspaceFolder}/src/sim/*.cpp",
+                "${workspaceFolder}/src/sim/Satellite/*.cpp",
                 "${workspaceFolder}/src/util/Cube/*.cpp",
                 "${workspaceFolder}/src/util/Spheroid/*.cpp",
                 "-lglfw",

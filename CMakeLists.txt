@@ -22,7 +22,7 @@ include_directories(
 add_executable(SAT_NETWORK_SIM
     src/main.cpp
     src/glad.c
-    src/sim/Satellite.cpp
+    src/sim/Satellite/Satellite.cpp
     src/sim/Sim.cpp
     src/ui/MainWindow.cpp
     src/util/Spheroid/Spheroid.cpp
@@ -48,7 +48,7 @@ find_package(GTest REQUIRED)
 # =========================
 add_executable(tests
     tests/satelliteTests.cpp
-    src/sim/Satellite.cpp
+    src/sim/Satellite/Satellite.cpp
     src/sim/Sim.cpp
 )
 

@@ -1,4 +1,4 @@
-#include "../src/sim/Satellite.hpp"
+#include "../src/sim/Satellite/Satellite.hpp"
 #include "../src/util/constants.hpp"
 
 #include <gtest/gtest.h>

@@ -1,5 +1,5 @@
 #pragma once
-#include "Satellite.hpp"
+#include "Satellite/Satellite.hpp"
 
 #include <vector>
 
