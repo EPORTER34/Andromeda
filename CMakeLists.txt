@@ -23,6 +23,7 @@ add_executable(SAT_NETWORK_SIM
     src/main.cpp
     src/glad.c
     src/sim/Satellite/Satellite.cpp
+    src/sim/Doppler/Doppler.hpp
     src/sim/Sim.cpp
     src/ui/MainWindow.cpp
     src/util/Spheroid/Spheroid.cpp
@@ -48,7 +49,9 @@ find_package(GTest REQUIRED)
 # =========================
 add_executable(tests
     tests/satelliteTests.cpp
+    tests/dopplerTests.cpp
     src/sim/Satellite/Satellite.cpp
+    src/sim/Doppler/Doppler.cpp
     src/sim/Sim.cpp
 )
 
