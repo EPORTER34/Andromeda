@@ -1,4 +1,4 @@
-src/glac.c linguist-vendored
+src/glad.c linguist-vendored
 include/glad/glad.h linguist-vendored
 include/GLFW/glfw3.h linguist-vendored
 include/GLFW/glfw3native.h linguist-vendored
