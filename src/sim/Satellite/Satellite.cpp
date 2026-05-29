@@ -31,7 +31,6 @@ void Satellite::initializeSatellite(double newRadius, double newInlination, doub
     sinI = sin(inclination);
 }
 
-//computes position in ECEF & returns in array
 std::array<double, 3> Satellite::computePosition(double simulationTime) const
 {
     double trueAnomaly = orbitalAngularVelocity * simulationTime + initialAnomaly;
