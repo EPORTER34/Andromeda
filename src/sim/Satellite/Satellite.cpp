@@ -3,38 +3,30 @@
 
 #include <cmath>
 
-//angles are in radians
-//prograde orbits: 0 < I < PI/2
-//polar orbit: I = PI/2
-//retrograde orbits: PI/2 < I < PI
-Satellite::Satellite(double newRadius, double newInlination, double newAscendingLongitude)
+OrbitalElements::OrbitalElements(double newRadius, double newInlination, double newAscendingLongitude, double newAnomaly)
 {
-    initializeSatellite(newRadius, newInlination, newAscendingLongitude);
-    initialAnomaly = 0;
-}
-Satellite::Satellite(double newRadius, double newInlination, double newAscendingLongitude, double newAnomaly)
-{
-    initializeSatellite(newRadius, newInlination, newAscendingLongitude);
+    radius = newRadius;
+    inclination = newInlination;
+    ascendingLongitude = newAscendingLongitude;
     initialAnomaly = newAnomaly;
 }
 
-void Satellite::initializeSatellite(double newRadius, double newInlination, double newAscendingLongitude)
-{  
-    orbitalRadius = newRadius;
-    inclination = newInlination;
-    ascendingLongitude = newAscendingLongitude;
-    
+//angles are in radians
+Satellite::Satellite(double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly) 
+: orbitalElements(newRadius,newInclination,newAscendingLongitude,newAnomaly)
+{
     orbitalAngularVelocity = sqrt(MU_EARTH / pow(newRadius,3));
-    cosO = cos(ascendingLongitude);
-    sinO = sin(ascendingLongitude);
-    cosI = cos(inclination);
-    sinI = sin(inclination);
+    cosO = cos(newAscendingLongitude);
+    sinO = sin(newAscendingLongitude);
+    cosI = cos(newInclination);
+    sinI = sin(newInclination);
 }
 
 std::array<double, 3> Satellite::computePosition(double simulationTime) const
 {
-    double trueAnomaly = orbitalAngularVelocity * simulationTime + initialAnomaly;
+    double trueAnomaly = orbitalAngularVelocity * simulationTime + orbitalElements.initialAnomaly;
     double cosV = cos(trueAnomaly), sinV = sin(trueAnomaly);
+    double orbitalRadius = orbitalElements.radius;
 
     //standard inclined circular orbit equations for ECI
     double ECIx = orbitalRadius * (cosO * cosV - sinO * sinV * cosI);

@@ -1,22 +1,26 @@
 #pragma once
 #include <array>
 
+class OrbitalElements
+{
+public:
+    OrbitalElements(double newRadius, double newInlination, double newAscendingLongitude, double newAnomaly);
+    double initialAnomaly;
+    double radius;
+    double ascendingLongitude;
+    double inclination;
+    //NOTE: ORBIT ASSUMED CIRCULAR
+};
+
 class Satellite
 {
 public:
-    Satellite(double newRadius, double newInlination, double newAscendingLongitude);
-    Satellite(double newRadius, double newInlination, double newAscendingLongitude, double newAnomaly);
+    Satellite(double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly);
 
     std::array<double, 3> computePosition(double simulationTime) const;
+
 private:
-    void initializeSatellite(double newRadius, double newInlination, double newAscendingLongitude);
-
-    //keplerian orbital elements
-    double initialAnomaly; //position of satellite (angle relative to equatorial plane)
-    double orbitalRadius; //radius of the orbit in km
-    double ascendingLongitude; //longitude where the ascending part of the orbit passes the equator
-    double inclination; //tilt relative to vertical
-
+    OrbitalElements orbitalElements;
     double orbitalAngularVelocity;
 
     //constants used in calculating position
@@ -24,6 +28,4 @@ private:
     double sinO;
     double cosI;
     double sinI;
-
-    //note: orbit is assumed to be circular
 };
