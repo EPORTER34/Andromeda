@@ -6,6 +6,9 @@ class Cube
 {
 public:
     Cube(float length, std::initializer_list<float> color);
+    ~Cube();
+    void Cube::initializeGlBuffers();
+    void Cube::render();
 private:
     void generateVertices(float length, std::initializer_list<float> color);
     void generateSquare(float length, float depth, std::initializer_list<float> color);

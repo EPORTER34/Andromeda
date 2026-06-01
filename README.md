@@ -11,7 +11,8 @@ backend: <br>
     -link budget analysis <br>
     -path loss/SNR <br>
     -shadowing & atmospheric effects <br>
-<br> <br>
+  -link everything together <br>
+<br>
 
 frontend: <br>
   open gl stuff <br>
