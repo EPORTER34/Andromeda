@@ -11,7 +11,8 @@ backend: <br>
     -doppler effect compensation <br>
     -link budget analysis <br>
     -path loss/SNR <br>
-  -multipath/fading <br>
+  -multipath/fading (not really significant in most cases) <br>
+  -shadowing & atmospheric effects <br>
   
 
 frontend: <br>
