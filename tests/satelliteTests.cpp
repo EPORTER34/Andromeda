@@ -26,7 +26,7 @@ TEST(SatelliteTests, 45DegreeInclination45DegreeAscendingZeroAnomaly)
     for(int i = 0; i < 3; ++i) EXPECT_NEAR(actual[i],expected[i],1);
 }
 
-TEST(SatelliteTests, 60DegreeInclination30DegreeAscendingZeroAnomalyYesEarthRotation)
+TEST(SatelliteTests, 60DegreeInclination30DegreeAscendingZeroAnomaly)
 {
     Satellite test(6.8e6,PI/3,PI/6,0);
 
