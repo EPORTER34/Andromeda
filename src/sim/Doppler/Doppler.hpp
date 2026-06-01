@@ -1,5 +1,9 @@
 #pragma once
+
+#include "../../util/constants.hpp"
+
 #include <array>
+#include <cmath>
 
 namespace Doppler
 {
