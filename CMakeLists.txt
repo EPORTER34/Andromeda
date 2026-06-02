@@ -27,6 +27,7 @@ add_executable(SAT_NETWORK_SIM
     src/sim/Sim.cpp
     src/ui/MainWindow.cpp
     src/util/Shapes/Shapes.cpp
+    src/util/VectorOperations/VectorOperations.cpp
 )
 
 target_include_directories(SAT_NETWORK_SIM PRIVATE ${GLFW_INCLUDE_DIRS})
@@ -53,6 +54,7 @@ add_executable(tests
     src/sim/Satellite/Satellite.cpp
     src/sim/Doppler/Doppler.cpp
     src/sim/Sim.cpp
+    src/util/VectorOperations/VectorOperations.cpp
 )
 
 target_include_directories(tests PRIVATE include)

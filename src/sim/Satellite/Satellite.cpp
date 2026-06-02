@@ -1,5 +1,6 @@
 #include "Satellite.hpp"
 #include "../../util/constants.hpp"
+#include "../../util/VectorOperations/VectorOperations.hpp"
 
 #include <cmath>
 
@@ -39,4 +40,14 @@ std::array<double, 3> Satellite::computePosition(double simulationTime) const
     return { ECIx * cosT + ECIy * sinT, 
             -ECIx * sinT + ECIy * cosT, 
             orbitalRadius * sinV * sinI};
+}
+
+std::array<double, 3> Satellite::computeVelocity(double simulationtime) const
+{
+    std::array<double, 3> pos = computePosition(simulationtime);
+    pos = VecOps::normalize(pos);
+    std::array<double, 3> normalVector = {sinI * sinO, -sinI * sinO, cosI};
+    std::array<double, 3> unitVel = VecOps::crossProduct(normalVector, pos);
+    double velocity = orbitalAngularVelocity * orbitalElements.radius;
+    return VecOps::distributeConstant(unitVel, velocity);
 }
