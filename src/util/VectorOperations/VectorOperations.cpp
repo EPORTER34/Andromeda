@@ -26,7 +26,7 @@ std::array<double,3> VecOps::crossProduct(std::array<double,3> a, std::array<dou
     return {x,y,z};
 }
 
-std::array<double,3> distributeConstant(std::array<double,3> vec, double constant)
+std::array<double,3> VecOps::distributeConstant(std::array<double,3> vec, double k)
 {
-    return {vec[0] * constant, vec[1] * constant, vec[2] * constant};
+    return {vec[0] * k, vec[1] * k, vec[2] * k};
 }
