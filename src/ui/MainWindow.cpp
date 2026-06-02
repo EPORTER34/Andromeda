@@ -107,8 +107,7 @@ MainWindow::MainWindow() : earth(6378, 6357, {.0f,.0f,1.0f })
 
     glClearColor(0.0f,.0f,.0f,1.0f);  
     
-    earth.initializeGlBuffers();
-
+    earth.initializeGLBuffers();
     glfwSetKeyCallback(window, keyCallback);
     glfwSetWindowUserPointer(window, this);
 }

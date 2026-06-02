@@ -7,8 +7,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "../sim/Sim.hpp"
-#include "../util/Spheroid/Spheroid.hpp"
-
+#include "../util/Shapes/Shapes.hpp"
 
 class MainWindow
 {

@@ -1,0 +1,41 @@
+#pragma once
+#include <vector>
+#include<initializer_list>
+
+
+class Shape
+{
+public:
+    ~Shape();
+    void initializeGLBuffers();
+    void render();
+
+protected:
+    void pushVertex(std::initializer_list<float> point, std::initializer_list<float> color);
+
+    std::vector<float> vertices;
+    std::vector<unsigned int> indexBuffer;
+    unsigned int VAO;
+    unsigned int VBO;
+    unsigned int EBO;
+};
+
+class Spheroid : public Shape
+{
+public:
+    Spheroid(float majorAxis, float minorAxis, std::initializer_list<float> color);
+private:
+    std::vector<int> generateVertices(float majorAxis, float minorAxis, std::initializer_list<float> color);
+    void generateRing(float glMajor, float glMinor, float v, std::initializer_list<float> color);
+    void generateIndexBuffer(std::vector<int> ringStarts);
+};
+
+class Cube : public Shape
+{
+public:
+    Cube(float length, std::initializer_list<float> color);
+private:
+    void generateVertices(float length, std::initializer_list<float> color);
+    void generateSquare(float length, float depth, std::initializer_list<float> color);
+    void generateIndexBuffer();
+};

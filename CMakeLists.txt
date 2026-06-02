@@ -26,7 +26,7 @@ add_executable(SAT_NETWORK_SIM
     src/sim/Doppler/Doppler.cpp
     src/sim/Sim.cpp
     src/ui/MainWindow.cpp
-    src/util/Spheroid/Spheroid.cpp
+    src/util/Shapes/Shapes.cpp
 )
 
 target_include_directories(SAT_NETWORK_SIM PRIVATE ${GLFW_INCLUDE_DIRS})
