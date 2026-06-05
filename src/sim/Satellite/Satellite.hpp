@@ -1,32 +1,14 @@
-#pragma once
-#include <array>
+#include "../Orbit/Orbit.hpp"
 
-class OrbitalElements
-{
-public:
-    OrbitalElements(double newRadius, double newInlination, double newAscendingLongitude, double newAnomaly);
-    double initialAnomaly;
-    double radius;
-    double ascendingLongitude;
-    double inclination;
-    //NOTE: ORBIT ASSUMED CIRCULAR
-};
+#include <array>
 
 class Satellite
 {
 public:
     Satellite(double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly);
-
     std::array<double, 3> computePosition(double simulationTime) const;
     std::array<double, 3> computeVelocity(double simulationtime) const;
-
+    //double calculateDopplerShift(double carrierFrequency) const;
 private:
-    OrbitalElements orbitalElements;
-    double orbitalAngularVelocity;
-
-    //constants used in calculating position
-    double cosO;
-    double sinO;
-    double cosI;
-    double sinI;
+    Orbit orbit;
 };

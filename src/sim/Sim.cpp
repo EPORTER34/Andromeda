@@ -11,10 +11,10 @@ Simulation::Simulation()
 void Simulation::runTimeStep()
 {
     time += timeStep;
-    for(int i = 0; i < satellites.size(); ++i)
-    {
-        satellites[i].computePosition(time);
-    }
+    //for(int i = 0; i < satellites.size(); ++i)
+    //{
+    //    satellites[i].computePosition(time);
+    //}
 }
 
 void Simulation::setTimeStep(float newTimeStep)

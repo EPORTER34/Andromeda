@@ -22,10 +22,14 @@ include_directories(
 add_executable(SAT_NETWORK_SIM
     src/main.cpp
     src/glad.c
+
     src/sim/Satellite/Satellite.cpp
     src/sim/Doppler/Doppler.cpp
+    src/sim/Orbit/Orbit.cpp
     src/sim/Sim.cpp
+
     src/ui/MainWindow.cpp
+
     src/util/Shapes/Shapes.cpp
     src/util/VectorOperations/VectorOperations.cpp
 )
@@ -49,11 +53,14 @@ find_package(GTest REQUIRED)
 # TEST EXECUTABLE
 # =========================
 add_executable(tests
-    tests/satelliteTests.cpp
+    tests/orbitTests.cpp
     tests/dopplerTests.cpp
+
     src/sim/Satellite/Satellite.cpp
     src/sim/Doppler/Doppler.cpp
+    src/sim/Orbit/Orbit.cpp
     src/sim/Sim.cpp
+
     src/util/VectorOperations/VectorOperations.cpp
 )
 

@@ -1,6 +1,5 @@
 #pragma once
 #include "Satellite/Satellite.hpp"
-#include "Doppler/Doppler.hpp"
 
 #include <vector>
 
