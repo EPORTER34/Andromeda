@@ -21,6 +21,8 @@ Orbit::Orbit(double newRadius, double newInclination, double newAscendingLongitu
     sinO = sin(newAscendingLongitude);
     cosI = cos(newInclination);
     sinI = sin(newInclination);
+    normalVector = {sinI * sinO, -sinI * sinO, cosI};
+    velocity = orbitalAngularVelocity * newRadius;
 }
 
 std::array<double, 3> Orbit::computePosition(double simulationTime) const
@@ -46,8 +48,6 @@ std::array<double, 3> Orbit::computeVelocity(double simulationtime) const
 {
     std::array<double, 3> pos = computePosition(simulationtime);
     pos = VecOps::normalize(pos);
-    std::array<double, 3> normalVector = {sinI * sinO, -sinI * sinO, cosI};     //member?
     std::array<double, 3> unitVel = VecOps::crossProduct(normalVector, pos);
-    double velocity = orbitalAngularVelocity * orbitalElements.radius;          //member?
     return VecOps::distributeConstant(unitVel, velocity);
 }

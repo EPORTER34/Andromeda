@@ -29,4 +29,8 @@ private:
     double sinO;
     double cosI;
     double sinI;
+
+    //constants used in calculating velocity
+    std::array<double, 3> normalVector;
+    double velocity;
 };
