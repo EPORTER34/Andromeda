@@ -51,3 +51,10 @@ std::array<double, 3> Orbit::computeVelocity(double simulationtime) const
     std::array<double, 3> unitVel = VecOps::crossProduct(normalVector, pos);
     return VecOps::distributeConstant(unitVel, velocity);
 }
+
+std::array<double, 3> Orbit::computeVelocity(std::array<double,3> position) const
+{
+    std::array<double,3> pos = VecOps::normalize(position);
+    std::array<double, 3> unitVel = VecOps::crossProduct(normalVector, pos);
+    return VecOps::distributeConstant(unitVel, velocity);
+}

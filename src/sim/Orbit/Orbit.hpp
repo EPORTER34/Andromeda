@@ -19,6 +19,7 @@ public:
 
     std::array<double, 3> computePosition(double simulationTime) const;
     std::array<double, 3> computeVelocity(double simulationtime) const;
+    std::array<double, 3> computeVelocity(std::array<double,3> position) const;
 
 private:
     OrbitalElements orbitalElements;
