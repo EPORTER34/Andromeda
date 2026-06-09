@@ -14,4 +14,5 @@ void OrbitalView::initializeGLBuffers()
 void OrbitalView::render()
 {
     earth.render();
+    //for(auto& i : satellites) i.render();
 }

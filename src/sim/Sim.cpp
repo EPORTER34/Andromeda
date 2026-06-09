@@ -11,13 +11,31 @@ Simulation::Simulation()
 void Simulation::runTimeStep()
 {
     time += timeStep;
-    //for(int i = 0; i < satellites.size(); ++i)
-    //{
-    //    satellites[i].computePosition(time);
-    //}
 }
 
 void Simulation::setTimeStep(float newTimeStep)
 {
     timeStep = newTimeStep;
+}
+
+std::vector<std::array<double,3>> Simulation::getSatellitePositions()
+{
+    std::vector<std::array<double,3>> positions;
+    for(int i = 0; i < satellites.size(); ++i )
+    {
+        std::array<double,3> position = satellites[i].computePosition(time);
+        positions.push_back(position);
+    }
+    return positions;
+}
+
+std::vector<double> Simulation::getDopplerShifts(double carrierFrequency, std::array<double,3> baseStationPos)
+{
+    std::vector<double> dopplerShifts;
+    for(int i = 0; i < satellites.size(); ++i)
+    {
+        double dopplerShift = satellites[i].calculateDopplerShift(carrierFrequency, baseStationPos, time);
+        dopplerShifts.push_back(dopplerShift);
+    }
+    return dopplerShifts;
 }

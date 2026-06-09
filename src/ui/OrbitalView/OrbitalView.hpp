@@ -2,6 +2,8 @@
 
 #include "../../util/Shapes/Shapes.hpp"
 
+#include <vector>
+
 class OrbitalView
 {
 public:
@@ -9,6 +11,6 @@ public:
     void initializeGLBuffers();
     void render();
 private:
-
+    std::vector<Cube> satellites;
     Spheroid earth;
 };
