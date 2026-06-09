@@ -29,6 +29,7 @@ add_executable(SAT_NETWORK_SIM
     src/sim/Sim.cpp
 
     src/ui/MainWindow.cpp
+    src/ui/OrbitalView/OrbitalView.cpp
 
     src/util/Shapes/Shapes.cpp
     src/util/VectorOperations/VectorOperations.cpp
