@@ -5,6 +5,7 @@ Assumptions: <br>
 circular satellite orbits <br>
 multipath mostly negligeble <br>
 ignoring drag & any other orbital drift <br>
+assuming earth is a sphere of radius 6378 km <br>
 
 
 todo: <br>

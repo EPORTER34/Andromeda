@@ -12,5 +12,5 @@ public:
     void render();
 private:
     std::vector<Cube> satellites;
-    Spheroid earth;
+    Sphere earth;
 };

@@ -24,10 +24,16 @@ class Spheroid : public Shape
 {
 public:
     Spheroid(float majorAxis, float minorAxis, std::initializer_list<float> color);
-private:
+protected:
     std::vector<int> generateVertices(float majorAxis, float minorAxis, std::initializer_list<float> color);
     void generateRing(float glMajor, float glMinor, float v, std::initializer_list<float> color);
     void generateIndexBuffer(std::vector<int> ringStarts);
+};
+
+class Sphere : public Spheroid
+{
+public:
+    Sphere(float radius, std::initializer_list<float> color) : Spheroid(radius, radius, color) {}
 };
 
 class Cube : public Shape
