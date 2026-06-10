@@ -1,6 +1,6 @@
 #include "OrbitalView.hpp"
 
-OrbitalView::OrbitalView() : earth(6378, {.0f,.0f,1.0f})
+OrbitalView::OrbitalView() : earth(GL_EARTH_RADIUS, {.0f,.0f,1.0f})
 {
 
 }

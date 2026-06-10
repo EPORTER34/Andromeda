@@ -5,7 +5,6 @@ Simulation::Simulation()
 {
     time = 0;
     timeStep = 100;
-
 }
 
 void Simulation::runTimeStep()
@@ -16,6 +15,16 @@ void Simulation::runTimeStep()
 void Simulation::setTimeStep(float newTimeStep)
 {
     timeStep = newTimeStep;
+}
+
+double Simulation::getSimTime() const
+{
+    return time;
+}
+
+void Simulation::setSimTime(double newSimTime)
+{
+    time = newSimTime;
 }
 
 std::vector<std::array<double,3>> Simulation::getSatellitePositions()

@@ -56,34 +56,31 @@ Spheroid::Spheroid(float majorAxis, float minorAxis, std::initializer_list<float
 //vertices in format (x,y,z) + (r,g,b)
 std::vector<int> Spheroid::generateVertices(float majorAxis, float minorAxis, std::initializer_list<float> color)
 {
-    float glMajor = .5;
-    float glMinor = glMajor * minorAxis / majorAxis;
-
     std::vector<int> ringStarts;
 
     //front point
     ringStarts.push_back(0);
-    pushVertex({glMajor,0,0}, color);
+    pushVertex({majorAxis,0,0}, color);
 
     for(float v = PI/24; v < PI; v += PI/24)
     {
         ringStarts.push_back(vertices.size() / 6);
-        generateRing(glMajor, glMinor, v, color);
+        generateRing(majorAxis, minorAxis, v, color);
     }
 
     //back point
     ringStarts.push_back(vertices.size() / 6);
-    pushVertex({-glMajor,0,0}, color);
+    pushVertex({-majorAxis,0,0}, color);
 
     return ringStarts;
 }
 
-void Spheroid::generateRing(float glMajor, float glMinor, float v, std::initializer_list<float> color)
+void Spheroid::generateRing(float majorAxis, float minorAxis, float v, std::initializer_list<float> color)
 {
-    float r = glMinor*sin(v);
+    float r = minorAxis*sin(v);
     for(float theta = 0; theta < 2*PI; theta += PI/12)
     {  
-        pushVertex({glMajor*(float)cos(v), r*(float)cos(theta), r*(float)sin(theta)}, 
+        pushVertex({majorAxis*(float)cos(v), r*(float)cos(theta), r*(float)sin(theta)}, 
                    {color.begin()[0], 1 - theta/(2*(float)PI), color.begin()[2]});
     }
 }
