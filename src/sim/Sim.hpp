@@ -12,6 +12,7 @@ public:
     void setTimeStep(float newTimeStep);
     double getSimTime() const;
     void setSimTime(double newSimTime);
+    void addSatellite(double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly);
     std::vector<std::array<double,3>> getSatellitePositions();
     std::vector<double> getDopplerShifts(double carrierFrequency, std::array<double,3> baseStationPos);
     

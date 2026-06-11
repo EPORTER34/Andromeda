@@ -27,6 +27,12 @@ void Simulation::setSimTime(double newSimTime)
     time = newSimTime;
 }
 
+void Simulation::addSatellite(double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly)
+{
+    Satellite newSatellite(newRadius, newInclination, newAscendingLongitude, newAnomaly);
+    satellites.push_back(newSatellite);
+}
+
 std::vector<std::array<double,3>> Simulation::getSatellitePositions()
 {
     std::vector<std::array<double,3>> positions;

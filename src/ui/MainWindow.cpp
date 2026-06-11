@@ -3,6 +3,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
+#include <array>
 
 MainWindow::MainWindow()
 {
@@ -31,6 +33,8 @@ MainWindow::MainWindow()
     glfwSetKeyCallback(window, keyCallback);
     glfwSetWindowUserPointer(window, this);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+    sim.addSatellite(6.8e6,0,0,0);  //temp
 }
 
 void MainWindow::createGLWindow()
@@ -185,7 +189,8 @@ void MainWindow::run()
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
         glUseProgram(shaderProgram);
 
-        orbitalView.render();
+        std::vector<std::array<double,3>> satPos = sim.getSatellitePositions();
+        orbitalView.render(satPos);
 
         glfwSwapBuffers(window);
 
