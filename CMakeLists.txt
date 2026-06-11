@@ -33,6 +33,7 @@ add_executable(SAT_NETWORK_SIM
 
     src/util/Shapes/Shapes.cpp
     src/util/VectorOperations/VectorOperations.cpp
+    src/util/Shader/Shader.cpp
 )
 
 target_include_directories(SAT_NETWORK_SIM PRIVATE ${GLFW_INCLUDE_DIRS})

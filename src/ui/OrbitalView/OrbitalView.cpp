@@ -19,7 +19,10 @@ void OrbitalView::render(std::vector<std::array<double,3>> satellitePositions)
     satellite.render(); //TODO: move to loop & add a input condition for the center position to shift to
     for(int i = 0; i < satellitePositions.size(); ++i)
     {
-
+        for(int j = 0; j < 3; ++j)
+        {
+            
+        }
         //std::cout << "X: " << satellitePositions[i][0] << " Y: " << satellitePositions[i][1] << " Z: " << satellitePositions[i][2] << std::endl;
 
         //TODO: use the positions one by one to move cubes (or 1 cube if possible)

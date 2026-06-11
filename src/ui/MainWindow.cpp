@@ -1,8 +1,6 @@
 #include "MainWindow.hpp"
 
 #include <iostream>
-#include <fstream>
-#include <sstream>
 #include <vector>
 #include <array>
 
@@ -18,15 +16,12 @@ MainWindow::MainWindow()
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.0f,.0f,.0f,1.0f);  
 
-    createShaderProgram();
+    shader.createShaderProgram();
 
     //intializing the transformation matrices in the shader
     model = glm::mat4(1.0f);    
     view = glm::mat4(1.0f);    
-    projection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);        
-    modelLoc = glGetUniformLocation(shaderProgram, "model");    
-    viewLoc = glGetUniformLocation(shaderProgram, "view");    
-    projLoc = glGetUniformLocation(shaderProgram, "projection"); 
+    projection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f); 
     
     orbitalView.initializeGLBuffers();
 
@@ -107,72 +102,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0,0,width,height);
 }
 
-void MainWindow::createShaderProgram()
-{
-    unsigned int vertexShader = getShader(GL_VERTEX_SHADER, "resource/shaders/basic.vert");
-    unsigned int fragmentShader = getShader(GL_FRAGMENT_SHADER, "resource/shaders/basic.frag");
-
-	unsigned int program = glCreateProgram();
-	glAttachShader(program, vertexShader);
-	glAttachShader(program, fragmentShader);
-	glLinkProgram(program);
-
-	int success;
-	glGetProgramiv(program, GL_LINK_STATUS, &success);
-	if (!success)
-	{
-        char infoLog[512];
-		glGetProgramInfoLog(program, 512, NULL, infoLog);
-		std::cout << "ERROR::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-        throw std::runtime_error("Error Linking Program");
-	}
-
-    shaderProgram = program;
-
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
-}
-
-unsigned int MainWindow::getShader(GLenum shaderType, std::string filePath)
-{
-    std::string shaderSource = readFile(filePath);
-    const char* cShaderSource = shaderSource.c_str();
-    return compileShader(shaderType, cShaderSource);
-}
-
-std::string MainWindow::readFile(std::string filePath)
-{
-    std::ifstream file(filePath);
-
-    if (!file)
-    {
-        throw std::runtime_error("Failed to open file: " + filePath);
-    }
-    std::stringstream buffer;
-    buffer << file.rdbuf();
-
-    return buffer.str();
-}
-
-unsigned int MainWindow::compileShader(unsigned int type, const char *source)
-{
-	unsigned int id = glCreateShader(type);
-	glShaderSource(id, 1, &source, NULL);
-	glCompileShader(id);
-
-	int success;
-	glGetShaderiv(id, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{   
-        char infoLog[512];
-		glGetShaderInfoLog(id, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::COMPILATION_FAILED\n" << infoLog << std::endl;
-        throw std::runtime_error("Error compiling shaders");
-	}
-
-	return id;
-}
-
 void MainWindow::run()
 {
     while(!glfwWindowShouldClose(window))
@@ -184,10 +113,10 @@ void MainWindow::run()
         //eventually for zoom in/out
         //projection = glm::ortho(-2.0f, 2.0f, -2.0f, 2.0f, -2.0f, 2.0f);
 
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));    
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));    
-        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-        glUseProgram(shaderProgram);
+        glUniformMatrix4fv(shader.modelLoc, 1, GL_FALSE, glm::value_ptr(model));    
+        glUniformMatrix4fv(shader.viewLoc, 1, GL_FALSE, glm::value_ptr(view));    
+        glUniformMatrix4fv(shader.projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+        glUseProgram(shader.shaderProgram);
 
         std::vector<std::array<double,3>> satPos = sim.getSatellitePositions();
         orbitalView.render(satPos);
@@ -200,6 +129,5 @@ void MainWindow::run()
 
 MainWindow::~MainWindow()   
 { 
-    glDeleteProgram(shaderProgram);
     glfwTerminate();    
 }

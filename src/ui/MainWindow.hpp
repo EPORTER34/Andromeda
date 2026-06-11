@@ -6,10 +6,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <string>
-
 #include "../sim/Sim.hpp"
 #include "OrbitalView/OrbitalView.hpp"
+#include "../util/Shader/Shader.hpp"
 
 class MainWindow
 {
@@ -25,21 +24,12 @@ private:
     void checkWindowLoaded();
     void checkGladLoaded();
 
-    void createShaderProgram();
-    unsigned int getShader(GLenum shaderType, std::string filePath);
-    std::string readFile(std::string filePath);
-    unsigned int compileShader(unsigned int type, const char *source);
-
     GLFWwindow* window;
-
-    unsigned int shaderProgram;
+    Shader shader;
 
     glm::mat4 model;    
     glm::mat4 view;    
-    glm::mat4 projection;        
-    GLint modelLoc;    
-    GLint viewLoc;    
-    GLint projLoc; 
+    glm::mat4 projection;
 
     OrbitalView orbitalView;
 
