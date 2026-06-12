@@ -24,12 +24,15 @@ MainWindow::MainWindow()
     projection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f); 
     
     orbitalView.initializeGLBuffers();
+    orbitalView.setShaderProgram(shader);
 
     glfwSetKeyCallback(window, keyCallback);
     glfwSetWindowUserPointer(window, this);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+    double PI = 3.14;
     sim.addSatellite(6.8e6,0,0,0);  //temp
+    sim.addSatellite(6.8e6,PI/4,PI/4,PI/4);
 }
 
 void MainWindow::createGLWindow()
@@ -110,13 +113,10 @@ void MainWindow::run()
 
         sim.runTimeStep();
 
-        //eventually for zoom in/out
-        //projection = glm::ortho(-2.0f, 2.0f, -2.0f, 2.0f, -2.0f, 2.0f);
-
-        glUniformMatrix4fv(shader.modelLoc, 1, GL_FALSE, glm::value_ptr(model));    
-        glUniformMatrix4fv(shader.viewLoc, 1, GL_FALSE, glm::value_ptr(view));    
-        glUniformMatrix4fv(shader.projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-        glUseProgram(shader.shaderProgram);
+        glUseProgram(shader.getShaderProgram());
+        glUniformMatrix4fv(shader.getModelLoc(), 1, GL_FALSE, glm::value_ptr(model));    
+        glUniformMatrix4fv(shader.getViewLoc(), 1, GL_FALSE, glm::value_ptr(view));    
+        glUniformMatrix4fv(shader.getProjLoc(), 1, GL_FALSE, glm::value_ptr(projection));
 
         std::vector<std::array<double,3>> satPos = sim.getSatellitePositions();
         orbitalView.render(satPos);

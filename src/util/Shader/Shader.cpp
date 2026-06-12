@@ -78,3 +78,23 @@ Shader::~Shader()
 {
     glDeleteProgram(shaderProgram);
 }
+
+unsigned int Shader::getShaderProgram()
+{
+	return shaderProgram;
+}
+
+GLint Shader::getModelLoc()
+{
+	return modelLoc;
+}
+
+GLint Shader::getViewLoc()
+{
+	return viewLoc;
+}
+
+GLint Shader::getProjLoc()
+{
+	return projLoc;
+}

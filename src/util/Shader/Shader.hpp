@@ -14,15 +14,18 @@ public:
     void createShaderProgram();
     ~Shader();
 
-    unsigned int shaderProgram;
-    GLint modelLoc;    
-    GLint viewLoc;    
-    GLint projLoc; 
+    unsigned int getShaderProgram();
+    GLint getModelLoc();
+    GLint getViewLoc();
+    GLint getProjLoc();
 
 private:
     unsigned int getShader(GLenum shaderType, std::string filePath);
     std::string readFile(std::string filePath);
     unsigned int compileShader(unsigned int type, const char *source);
 
-    
+    unsigned int shaderProgram;
+    GLint modelLoc;    
+    GLint viewLoc;    
+    GLint projLoc; 
 };
