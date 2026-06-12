@@ -11,28 +11,20 @@ MainWindow::MainWindow()
     checkWindowLoaded();
     glfwMakeContextCurrent(window);
     checkGladLoaded();
-
-    glViewport(0,0,800,600);
-    glEnable(GL_DEPTH_TEST);
-    glClearColor(0.0f,.0f,.0f,1.0f);  
+    setWindowAttributes();
 
     shader.createShaderProgram();
 
-    //intializing the transformation matrices in the shader
-    model = glm::mat4(1.0f);    
-    view = glm::mat4(1.0f);    
-    projection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f); 
+    initTransformationMatrices();
     
     orbitalView.initializeGLBuffers();
     orbitalView.setShaderProgram(shader);
 
-    glfwSetKeyCallback(window, keyCallback);
-    glfwSetWindowUserPointer(window, this);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
+    //TODO: actually put something in the csv file to read in to replace the code below
     double PI = 3.14;
-    sim.addSatellite(6.8e6,0,0,0);  //temp
+    sim.addSatellite(6.8e6,0,0,0);
     sim.addSatellite(6.8e6,PI/4,PI/4,PI/4);
+    sim.addSatellite(15e6,0,0,0);
 }
 
 void MainWindow::createGLWindow()
@@ -61,6 +53,23 @@ void MainWindow::checkGladLoaded()
         std::cout << "Failed to initialize Glad" << std::endl;
         throw std::runtime_error("Failed to initialize GLAD");
     }
+}
+
+void MainWindow::setWindowAttributes()
+{
+    glViewport(0,0,800,600);
+    glEnable(GL_DEPTH_TEST);
+    glClearColor(0.0f,.0f,.0f,1.0f);  
+    glfwSetKeyCallback(window, keyCallback);
+    glfwSetWindowUserPointer(window, this);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+}
+
+void MainWindow::initTransformationMatrices()
+{
+    model = glm::mat4(1.0f);    
+    view = glm::mat4(1.0f);    
+    projection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f); 
 }
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -118,7 +127,7 @@ void MainWindow::run()
         glUniformMatrix4fv(shader.getViewLoc(), 1, GL_FALSE, glm::value_ptr(view));    
         glUniformMatrix4fv(shader.getProjLoc(), 1, GL_FALSE, glm::value_ptr(projection));
 
-        std::vector<std::array<double,3>> satPos = sim.getSatellitePositions();
+        std::vector<std::array<double,3>> satPos = sim.getSatellitePositionsECI();
         orbitalView.render(satPos);
 
         glfwSwapBuffers(window);

@@ -7,9 +7,9 @@ Satellite::Satellite(double newRadius, double newInclination, double newAscendin
     //probally need to put something here later
 }
 
-std::array<double, 3> Satellite::computePosition(double simulationTime) const
+std::array<double, 3> Satellite::computePositionECI(double simulationTime) const
 {
-    return orbit.computePosition(simulationTime);
+    return orbit.computePositionECI(simulationTime);
 }
 std::array<double, 3> Satellite::computeVelocity(double simulationtime) const
 {
@@ -18,7 +18,7 @@ std::array<double, 3> Satellite::computeVelocity(double simulationtime) const
 
 double Satellite::calculateDopplerShift(double carrierFrequency, std::array<double,3> baseSationPositionECEF, double simTime) const
 {
-    std::array<double,3> satPos = orbit.computePosition(simTime);
+    std::array<double,3> satPos = orbit.computePositionECEF(simTime);
     std::array<double,3> satVel = orbit.computeVelocity(satPos);
     return Doppler::findDopperShift(carrierFrequency, satPos, baseSationPositionECEF, satVel);
 }

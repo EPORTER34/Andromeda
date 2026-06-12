@@ -40,6 +40,8 @@ void OrbitalView::render(std::vector<std::array<double,3>> satellitePositions)
 
         satellite.render();
     }
+
+    initTransformationMatrices();
 }
 
 void OrbitalView::setShaderProgram(Shader& newShader)

@@ -17,7 +17,8 @@ class Orbit
 public:
     Orbit(double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly);
 
-    std::array<double, 3> computePosition(double simulationTime) const;
+    std::array<double, 3> computePositionECI(double simulationTime) const;
+    std::array<double, 3> computePositionECEF(double simulationTime) const;
     std::array<double, 3> computeVelocity(double simulationtime) const;
     std::array<double, 3> computeVelocity(std::array<double,3> position) const;
 

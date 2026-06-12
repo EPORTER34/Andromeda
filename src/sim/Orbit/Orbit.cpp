@@ -25,7 +25,7 @@ Orbit::Orbit(double newRadius, double newInclination, double newAscendingLongitu
     velocity = orbitalAngularVelocity * newRadius;
 }
 
-std::array<double, 3> Orbit::computePosition(double simulationTime) const
+std::array<double, 3> Orbit::computePositionECI(double simulationTime) const
 {
     double trueAnomaly = orbitalAngularVelocity * simulationTime + orbitalElements.initialAnomaly;
     double cosV = cos(trueAnomaly), sinV = sin(trueAnomaly);
@@ -34,19 +34,26 @@ std::array<double, 3> Orbit::computePosition(double simulationTime) const
     //standard inclined circular orbit equations for ECI
     double ECIx = orbitalRadius * (cosO * cosV - sinO * sinV * cosI);
     double ECIy = orbitalRadius * (sinO * cosV + cosO * sinV * cosI);
+    double ECIz = orbitalRadius * sinV * sinI;
 
-    //conversion to ECEF
+    return {ECIx, ECIy, ECIz};
+}
+
+std::array<double, 3> Orbit::computePositionECEF(double simulationTime) const
+{
+    std::array<double,3> ECI = computePositionECI(simulationTime);
+
     double earthAngle = EARTH_ANGULAR_VELOCITY * simulationTime;
     double cosT = cos(earthAngle), sinT = sin(earthAngle);
 
-    return { ECIx * cosT + ECIy * sinT, 
-            -ECIx * sinT + ECIy * cosT, 
-            orbitalRadius * sinV * sinI};
+    return { ECI[0] * cosT + ECI[1] * sinT, 
+            -ECI[0] * sinT + ECI[1] * cosT, 
+            ECI[2]};
 }
 
 std::array<double, 3> Orbit::computeVelocity(double simulationtime) const
 {
-    std::array<double, 3> pos = computePosition(simulationtime);
+    std::array<double, 3> pos = computePositionECEF(simulationtime);
     pos = VecOps::normalize(pos);
     std::array<double, 3> unitVel = VecOps::crossProduct(normalVector, pos);
     return VecOps::distributeConstant(unitVel, velocity);

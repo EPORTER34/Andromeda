@@ -11,7 +11,7 @@ TEST(OrbitTests, EquatorialOrbit)
     Orbit test(6.8e6,0,0,0);
 
     const double expected[3] = { 6799996.22811, 7160.80242, 0.0};
-    const std::array<double,3> actual = test.computePosition(1.0);
+    const std::array<double,3> actual = test.computePositionECEF(1.0);
 
     for(int i = 0; i < 3; ++i) EXPECT_NEAR(actual[i],expected[i],1);
 }
@@ -21,7 +21,7 @@ TEST(OrbitTests, ArbitrarySymmetricOrbit)
     Orbit test(6.8e6,PI/4,PI/4,0);
 
     const double expected[3] = {4804845.08459, 4811800.53790, 5413.58403};
-    const std::array<double,3> actual = test.computePosition(1);
+    const std::array<double,3> actual = test.computePositionECEF(1);
 
     for(int i = 0; i < 3; ++i) EXPECT_NEAR(actual[i],expected[i],1);
 }
@@ -31,7 +31,7 @@ TEST(OrbitTests, ArbitraryAsymmetricOrbit)
     Orbit test(6.8e6,PI/3,PI/6,0);
 
     const double expected[3] = {5.887303116222798e6,3.402883785034083e6,0.006630480031255e6};
-    const std::array<double,3> actual = test.computePosition(1);
+    const std::array<double,3> actual = test.computePositionECEF(1);
 
     for(int i = 0; i < 3; ++i) EXPECT_NEAR(actual[i],expected[i],1);
 }

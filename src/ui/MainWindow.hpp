@@ -20,9 +20,11 @@ public:
 
 private:
     void createGLWindow();
-
     void checkWindowLoaded();
     void checkGladLoaded();
+    void setWindowAttributes();
+
+    void initTransformationMatrices();
 
     GLFWwindow* window;
     Shader shader;

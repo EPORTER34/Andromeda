@@ -33,12 +33,12 @@ void Simulation::addSatellite(double newRadius, double newInclination, double ne
     satellites.push_back(newSatellite);
 }
 
-std::vector<std::array<double,3>> Simulation::getSatellitePositions()
+std::vector<std::array<double,3>> Simulation::getSatellitePositionsECI()
 {
     std::vector<std::array<double,3>> positions;
     for(int i = 0; i < satellites.size(); ++i )
     {
-        std::array<double,3> position = satellites[i].computePosition(time);
+        std::array<double,3> position = satellites[i].computePositionECI(time);
         positions.push_back(position);
     }
     return positions;
