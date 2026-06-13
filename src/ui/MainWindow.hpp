@@ -17,6 +17,8 @@ public:
     ~MainWindow();
     void run();
     void setSimSpeed(float newSpeed);
+    void zoomOrbitalIn();
+    void zoomOrbitalOut();
 
 private:
     void createGLWindow();
@@ -40,3 +42,4 @@ private:
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+void scrollCallback(GLFWwindow* window, double horzScroll, double vertScroll);

@@ -22,9 +22,11 @@ MainWindow::MainWindow()
 
     //TODO: actually put something in the csv file to read in to replace the code below
     double PI = 3.14;
-    sim.addSatellite(6.8e6,0,0,0);
-    sim.addSatellite(6.8e6,PI/4,PI/4,PI/4);
-    sim.addSatellite(15e6,0,0,0);
+    sim.addSatellite(6.8e6,0,0,0);                  //leo
+    sim.addSatellite(6.8e6,PI/4,PI/4,PI/4);         //leo
+    sim.addSatellite(15e6,0,0,0);                   //meo?
+    sim.addSatellite(8e6, 3*PI/8, 5*PI/12, 3*PI/2); //leo
+    sim.addSatellite(42.164e6,0,0,0);               //geo
 }
 
 void MainWindow::createGLWindow()
@@ -63,6 +65,9 @@ void MainWindow::setWindowAttributes()
     glfwSetKeyCallback(window, keyCallback);
     glfwSetWindowUserPointer(window, this);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetScrollCallback(window, scrollCallback);
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 void MainWindow::initTransformationMatrices()
@@ -107,6 +112,25 @@ void MainWindow::setSimSpeed(float newSpeed)
 {
     sim.setTimeStep(newSpeed);
     std::cout << "Time Step Changed to " << newSpeed << "s" << std::endl;
+}
+
+void scrollCallback(GLFWwindow* window, double horzScroll, double vertScroll)
+{
+    MainWindow* UI = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
+    if(vertScroll > 0) UI->zoomOrbitalIn();
+    else UI->zoomOrbitalOut();
+}
+
+void MainWindow::zoomOrbitalIn()
+{
+    orbitalView.zoomIn();
+    std::cout << "Orbital View Zoomed In" << std::endl;
+}
+
+void MainWindow::zoomOrbitalOut()
+{
+    orbitalView.zoomOut();
+    std::cout << "Orbital View Zoomed Out" << std::endl; 
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
