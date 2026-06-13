@@ -7,7 +7,6 @@ multipath mostly negligeble <br>
 ignoring drag & any other orbital drift <br>
 assuming earth is a sphere of radius 6378 km <br>
 
-
 todo: <br>
 backend: <br>
   -sat obrital mechanics <br>
@@ -21,10 +20,14 @@ backend: <br>
 <br>
 
 frontend: <br>
-  open gl stuff <br>
+  pan left/right on OrbitalView <br>
+  viewing pannels <br>
+    satellite numbers (with dropdown for orbital elements?) <br>
+    doppler effect <br>
+    link budget (with dropdowns for losses) <br>
 
+<br>
   potentially add multithreading <br>
 <br>
 readme<br>
-  change project name? (Andromeda) <br>
   actually document (assumptions made, features, design decisions) <br>
