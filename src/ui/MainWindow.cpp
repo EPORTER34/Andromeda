@@ -1,8 +1,11 @@
 #include "MainWindow.hpp"
+#include "../util/constants.hpp"
 
 #include <iostream>
 #include <vector>
 #include <array>
+#include <fstream>
+#include <sstream>
 
 MainWindow::MainWindow()
 {
@@ -20,13 +23,8 @@ MainWindow::MainWindow()
     orbitalView.initializeGLBuffers();
     orbitalView.setShaderProgram(shader);
 
-    //TODO: actually put something in the csv file to read in to replace the code below
-    double PI = 3.14;
-    sim.addSatellite(6.8e6,0,0,0);                  //leo
-    sim.addSatellite(6.8e6,PI/4,PI/4,PI/4);         //leo
-    sim.addSatellite(15e6,0,0,0);                   //meo?
-    sim.addSatellite(8e6, 3*PI/8, 5*PI/12, 3*PI/2); //leo
-    sim.addSatellite(42.164e6,0,0,0);               //geo
+    //TODO: add a menu for these & others
+    loadNetworkFromCSV("resource/networks/GPS.csv");
 }
 
 void MainWindow::createGLWindow()
@@ -67,7 +65,7 @@ void MainWindow::setWindowAttributes()
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetScrollCallback(window, scrollCallback);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 void MainWindow::initTransformationMatrices()
@@ -75,6 +73,38 @@ void MainWindow::initTransformationMatrices()
     model = glm::mat4(1.0f);    
     view = glm::mat4(1.0f);    
     projection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f); 
+}
+
+void MainWindow::loadNetworkFromCSV(std::string filePath)
+{
+    std::ifstream input(filePath);
+    std::string line;
+    const double degToRad = PI / 180;
+
+    if (!std::getline(input, line))     return ;
+
+    while (std::getline(input, line))
+    {
+        if (line.empty())
+            continue;
+
+        std::stringstream ss(line);
+        std::string field;
+
+        std::getline(ss, field, ',');
+        double radius = 1e3 * std::stod(field);
+
+        std::getline(ss, field, ',');
+        double inclination = degToRad * std::stod(field);
+
+        std::getline(ss, field, ',');
+        double raan = degToRad * std::stod(field);
+
+        std::getline(ss, field, ',');
+        double initialAnomaly = degToRad * std::stod(field);
+
+        sim.addSatellite(radius, inclination, raan, initialAnomaly);
+    }
 }
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -90,19 +120,19 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
             std::cout << "Simulation Terminated" << std::endl;
             break;
         case GLFW_KEY_1:
-            UI->setSimSpeed(1);
+            UI->setSimSpeed(10);
             break;
         case GLFW_KEY_2:
-            UI->setSimSpeed(10);
+            UI->setSimSpeed(50);
             break;
         case GLFW_KEY_3:
             UI->setSimSpeed(100);
             break;
         case GLFW_KEY_4:
-            UI->setSimSpeed(1000);
+            UI->setSimSpeed(500);
             break;
         case GLFW_KEY_5:
-            UI->setSimSpeed(10000);
+            UI->setSimSpeed(1000);
             break;
         }
     }

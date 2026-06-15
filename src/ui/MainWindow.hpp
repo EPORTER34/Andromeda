@@ -28,6 +28,8 @@ private:
 
     void initTransformationMatrices();
 
+    void loadNetworkFromCSV(std::string filePath);
+    
     GLFWwindow* window;
     Shader shader;
 
