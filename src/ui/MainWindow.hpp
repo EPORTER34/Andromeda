@@ -41,7 +41,3 @@ private:
 
     Simulation sim;
 };
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-void scrollCallback(GLFWwindow* window, double horzScroll, double vertScroll);

@@ -15,7 +15,7 @@ void OrbitalView::initTransformationMatrices()
 {
     model = glm::mat4(1.0f);    
     view = glm::mat4(1.0f);    
-    //width/height
+    //width/height   TODO: make this change projection on resize of window
     projection = glm::perspective(glm::radians(60.0f), (float)1000 / (float)1000, 0.01f, 100000.0f);
 }
 

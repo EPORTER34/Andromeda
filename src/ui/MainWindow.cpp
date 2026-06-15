@@ -1,5 +1,6 @@
 #include "MainWindow.hpp"
 #include "../util/constants.hpp"
+#include "../util/Input/Input.hpp"
 
 #include <iostream>
 #include <vector>
@@ -15,6 +16,7 @@ MainWindow::MainWindow()
     glfwMakeContextCurrent(window);
     checkGladLoaded();
     setWindowAttributes();
+    Input::setCallbackFunctions(window);
 
     shader.createShaderProgram();
 
@@ -24,9 +26,9 @@ MainWindow::MainWindow()
     orbitalView.setShaderProgram(shader);
 
     //TODO: add a menu for these & others
-    //loadNetworkFromCSV("resource/networks/GPS.csv");
+    loadNetworkFromCSV("resource/networks/GPS.csv");
     //loadNetworkFromCSV("resource/networks/Kuiper_Network.csv");
-    loadNetworkFromCSV("resource/networks/Starlink_Network.csv");
+    //loadNetworkFromCSV("resource/networks/Starlink_Network.csv");
 }
 
 void MainWindow::createGLWindow()
@@ -62,11 +64,7 @@ void MainWindow::setWindowAttributes()
     glViewport(0,0,800,600);
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.0f,.0f,.0f,1.0f);  
-    glfwSetKeyCallback(window, keyCallback);
     glfwSetWindowUserPointer(window, this);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetScrollCallback(window, scrollCallback);
-
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
@@ -112,48 +110,10 @@ void MainWindow::loadNetworkFromCSV(std::string filePath)
     }
 }
 
-void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-    MainWindow* UI = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
-
-    if(action == GLFW_PRESS)
-    {
-        switch(key)
-        {
-        case GLFW_KEY_ESCAPE:
-            glfwSetWindowShouldClose(window, true);
-            std::cout << "Simulation Terminated" << std::endl;
-            break;
-        case GLFW_KEY_1:
-            UI->setSimSpeed(10);
-            break;
-        case GLFW_KEY_2:
-            UI->setSimSpeed(50);
-            break;
-        case GLFW_KEY_3:
-            UI->setSimSpeed(100);
-            break;
-        case GLFW_KEY_4:
-            UI->setSimSpeed(500);
-            break;
-        case GLFW_KEY_5:
-            UI->setSimSpeed(1000);
-            break;
-        }
-    }
-}
-
 void MainWindow::setSimSpeed(float newSpeed)
 {
     sim.setTimeStep(newSpeed);
     std::cout << "Time Step Changed to " << newSpeed << "s" << std::endl;
-}
-
-void scrollCallback(GLFWwindow* window, double horzScroll, double vertScroll)
-{
-    MainWindow* UI = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
-    if(vertScroll > 0) UI->zoomOrbitalIn();
-    else UI->zoomOrbitalOut();
 }
 
 void MainWindow::zoomOrbitalIn()
@@ -166,11 +126,6 @@ void MainWindow::zoomOrbitalOut()
 {
     orbitalView.zoomOut();
     std::cout << "Orbital View Zoomed Out" << std::endl; 
-}
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0,0,width,height);
 }
 
 void MainWindow::run()
