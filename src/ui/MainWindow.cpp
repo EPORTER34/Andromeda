@@ -24,7 +24,8 @@ MainWindow::MainWindow()
     orbitalView.setShaderProgram(shader);
 
     //TODO: add a menu for these & others
-    loadNetworkFromCSV("resource/networks/GPS.csv");
+    //loadNetworkFromCSV("resource/networks/GPS.csv");
+    loadNetworkFromCSV("resource/networks/Kuiper_Network.csv");
 }
 
 void MainWindow::createGLWindow()
@@ -92,6 +93,9 @@ void MainWindow::loadNetworkFromCSV(std::string filePath)
         std::string field;
 
         std::getline(ss, field, ',');
+        std::string name = field;
+
+        std::getline(ss, field, ',');
         double radius = 1e3 * std::stod(field);
 
         std::getline(ss, field, ',');
@@ -103,7 +107,7 @@ void MainWindow::loadNetworkFromCSV(std::string filePath)
         std::getline(ss, field, ',');
         double initialAnomaly = degToRad * std::stod(field);
 
-        sim.addSatellite(radius, inclination, raan, initialAnomaly);
+        sim.addSatellite(name, radius, inclination, raan, initialAnomaly);
     }
 }
 

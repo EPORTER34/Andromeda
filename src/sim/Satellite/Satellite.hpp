@@ -1,11 +1,12 @@
 #include "../Orbit/Orbit.hpp"
 
 #include <array>
+#include <string>
 
 class Satellite
 {
 public:
-    Satellite(double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly);
+    Satellite(std::string newName, double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly);
     std::array<double, 3> computePositionECI(double simulationTime) const;
     std::array<double, 3> computeVelocity(double simulationtime) const;
 
@@ -13,4 +14,5 @@ public:
 
 private:
     Orbit orbit;
+    std::string name;
 };

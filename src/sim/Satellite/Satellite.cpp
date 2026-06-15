@@ -1,10 +1,10 @@
 #include "Satellite.hpp"
 #include "../Doppler/Doppler.hpp"
 
-Satellite::Satellite(double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly)
+Satellite::Satellite(std::string newName, double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly)
  :orbit(newRadius,newInclination,newAscendingLongitude,newAnomaly)
 {
-    //probally need to put something here later
+    name = newName;
 }
 
 std::array<double, 3> Satellite::computePositionECI(double simulationTime) const

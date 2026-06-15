@@ -27,9 +27,9 @@ void Simulation::setSimTime(double newSimTime)
     time = newSimTime;
 }
 
-void Simulation::addSatellite(double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly)
+void Simulation::addSatellite(std::string newName, double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly)
 {
-    Satellite newSatellite(newRadius, newInclination, newAscendingLongitude, newAnomaly);
+    Satellite newSatellite(newName, newRadius, newInclination, newAscendingLongitude, newAnomaly);
     satellites.push_back(newSatellite);
 }
 
