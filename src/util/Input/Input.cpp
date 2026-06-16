@@ -14,6 +14,8 @@ void Input::setCallbackFunctions(GLFWwindow* window)
 
 void Input::framebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
+    MainWindow* UI = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
+    UI->resizeWindow(width, height);
     glViewport(0,0,width,height);
 }
 

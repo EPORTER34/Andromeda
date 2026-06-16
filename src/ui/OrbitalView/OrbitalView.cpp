@@ -16,8 +16,7 @@ void OrbitalView::initTransformationMatrices()
 {
     model = glm::mat4(1.0f);    
     view = glm::mat4(1.0f);    
-    //width/height   TODO: make this change projection on resize of window
-    projection = glm::perspective(glm::radians(60.0f), (float)1000 / (float)1000, 0.01f, 100000.0f);
+    projection = glm::perspective(glm::radians(60.0f), (float)1920 / (float)1080, 0.01f, 100000.0f);
 }
 
 void OrbitalView::initializeGLBuffers()
@@ -92,4 +91,10 @@ void OrbitalView::rotateUpDown(double deltaY)
     pitch += deltaY * ROTATE_SENSITIVITY;
     if(pitch > 89.9) pitch = 89.9;
     if(pitch < -89.9) pitch = -89.9;
+}
+
+void OrbitalView::resizeWindow(int width, int height)
+{
+    //TODO: this seems kind of buggy, fix
+    projection = glm::perspective(glm::radians(60.0f), (float)width / (float)height, 0.01f, 100000.0f);
 }

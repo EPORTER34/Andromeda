@@ -20,6 +20,7 @@ public:
     void zoomOrbitalIn();
     void zoomOrbitalOut();
     void rotateOrbital(double deltaX, double deltaY);
+    void resizeWindow(int width, int height);
 
 private:
     void createGLWindow();

@@ -27,6 +27,7 @@ public:
     void zoomOut();
     void rotateLeftRight(double deltaX);
     void rotateUpDown(double deltaY);
+    void resizeWindow(int width, int height);
 
 private:
     void initTransformationMatrices();

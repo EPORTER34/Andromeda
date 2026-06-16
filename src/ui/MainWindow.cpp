@@ -37,7 +37,7 @@ void MainWindow::createGLWindow()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE);
-    window = glfwCreateWindow(1000,1000,"Satellite Network Sim",NULL,NULL);
+    window = glfwCreateWindow(1920,1080,"Satellite Network Sim",NULL,NULL);
 }
 
 void MainWindow::checkWindowLoaded()
@@ -133,6 +133,11 @@ void MainWindow::rotateOrbital(double deltaX, double deltaY)
     orbitalView.rotateLeftRight(deltaX);
     orbitalView.rotateUpDown(deltaY);
 }
+
+ void MainWindow::resizeWindow(int width, int height)
+ {
+    orbitalView.resizeWindow(width, height);
+ }
 
 void MainWindow::run()
 {
