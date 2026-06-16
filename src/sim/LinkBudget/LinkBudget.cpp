@@ -7,6 +7,7 @@ Losses LinkBudget::calculateLosses(double carrierFrequency, std::array<double,3>
 {
     Losses losses;
     losses.freeSpaceLoss = calculateFreeSpaceLoss(carrierFrequency, baseStationPos, satellitePos);
+    
 
     return losses;
 }

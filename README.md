@@ -6,6 +6,8 @@ circular satellite orbits <br>
 multipath mostly negligeble <br>
 ignoring drag & any other orbital drift <br>
 assuming earth is a sphere of radius 6378 km <br>
+for atmospheric gas absorption, the mean annual global atmosphere is used, as detailed in ITU-R P.835 <br>
+the attenuation from mean annual global is then approximated with the formula y_surf * L_eff / sin(theta) <br>
 
 todo: <br>
 backend: <br>
@@ -30,3 +32,12 @@ frontend: <br>
 <br>
 readme<br>
   actually document (assumptions made, features, design decisions) <br>
+
+
+Losses <br>
+Atmospheric Gas Absorption <br>
+Atmospheric gas absoprtion in this model is approximated using the formula <br>
+A<sub>atm</sub> = γ(f) * L<sub>eff</sub> / sin(θ) <br>
+where: <br>
+L<sub>eff</sub> = 8 km (assumed atmospher thickness) <br>
+θ = elevation angle between the satellite& ground <br>
