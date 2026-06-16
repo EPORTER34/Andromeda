@@ -11,21 +11,21 @@ the attenuation from mean annual global is then approximated with the formula y_
 
 todo: <br>
 backend: <br>
-  -sat obrital mechanics <br>
-    -tle parsing <br>
-    -sgp4 propogation <br>
-  -ground to sat comm <br>
-    -link budget analysis <br>
-    -path loss/SNR <br>
-    -shadowing & atmospheric effects <br>
-  -link everything together <br>
+  - sat obrital mechanics <br>
+    - tle parsing <br>
+    - sgp4 propogation <br>
+  - ground to sat comm <br>
+    - link budget analysis <br>
+    - path loss/SNR <br>
+    - shadowing & atmospheric effects <br>
+  - link everything together <br>
 <br>
 
 frontend: <br>
-  viewing pannels <br>
-    satellite numbers (with dropdown for orbital elements?) <br>
-    doppler effect <br>
-    link budget (with dropdowns for losses) <br>
+  - viewing pannels <br>
+    - satellite numbers (with dropdown for orbital elements?) <br>
+    - doppler effect <br>
+    - link budget (with dropdowns for losses) <br>
 
 <br>
   potentially add multithreading <br>
@@ -40,9 +40,11 @@ Atmospheric gas absoprtion in this model is approximated using the formula <br>
 > A<sub>atm</sub> = γ(f) * L<sub>eff</sub> / sin(θ) <br>
 
 where: <br>
+f = carrier frequency in GHz <br>
 L<sub>eff</sub> = 8 km (assumed atmosphere thickness) <br>
 θ = elevation angle between the satellite & ground <br>
-γ(f) = surface specific attenuation, which is given by the approximation <br>
+γ(f) = surface specific attenuation, which is given by the approximation: <br>
 > γ(f) = .002 * f<sup>2</sup> / (f<sup>2</sup> + 25) + .0035 * f<sup>2</sup> / (f<sup>2</sup> + 9) <br>
 
-which comes from the standard γ function detailed in ITU-R P.676, where the mean global annual atmosphere is used
+which comes from the standard γ function detailed in ITU-R P.676, where the mean global annual atmosphere is used <br>
+this model gives a rough approximation for frequencys < 40 GHz, but the water vapor resonance peak at ~22 GHz is not accurate <br>
