@@ -42,3 +42,7 @@ Atmospheric gas absoprtion in this model is approximated using the formula <br>
 where: <br>
 L<sub>eff</sub> = 8 km (assumed atmosphere thickness) <br>
 θ = elevation angle between the satellite & ground <br>
+γ(f) = surface specific attenuation, which is given by the approximation <br>
+> γ(f) = .002 * f<sup>2</sup> / (f<sup>2</sup> + 25) + .0035 * f<sup>2</sup> / (f<sup>2</sup> + 9) <br>
+
+which comes from the standard γ function detailed in ITU-R P.676, where the mean global annual atmosphere is used
