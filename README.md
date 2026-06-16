@@ -36,7 +36,7 @@ readme<br>
 
 ## Losses <br>
 ### Atmospheric Gas Absorption <br>
-Atmospheric gas absoprtion in this model is approximated using the formula <br>
+Atmospheric gas absoprtion in this model is approximated using the formula: <br>
 > A<sub>atm</sub> = γ(f) * L<sub>eff</sub> / sin(θ) <br>
 
 where: <br>
@@ -47,4 +47,4 @@ L<sub>eff</sub> = 8 km (assumed atmosphere thickness) <br>
 > γ(f) = .002 * f<sup>2</sup> / (f<sup>2</sup> + 25) + .0035 * f<sup>2</sup> / (f<sup>2</sup> + 9) <br>
 
 Which comes from the standard γ function detailed in ITU-R P.676, where the mean global annual atmosphere is used. 
-This model gives a rough approximation for frequencys < 40 GHz, but the water vapor resonance peak at ~22 GHz is not accurate <br>
+This model gives a rough approximation for frequencys < 40 GHz, but the water vapor resonance peak at ~22 GHz is not accurate. <br>
