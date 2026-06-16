@@ -80,8 +80,7 @@ void Spheroid::generateRing(float majorAxis, float minorAxis, float v, std::init
     float r = minorAxis*sin(v);
     for(float theta = 0; theta < 2*PI; theta += PI/12)
     {  
-        pushVertex({majorAxis*(float)cos(v), r*(float)cos(theta), r*(float)sin(theta)}, 
-                   {color.begin()[0], 1 - theta/(2*(float)PI), color.begin()[2]});
+        pushVertex({majorAxis*(float)cos(v), r*(float)cos(theta), r*(float)sin(theta)}, color);
     }
 }
 

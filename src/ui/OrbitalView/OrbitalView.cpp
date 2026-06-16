@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cmath>
 
-OrbitalView::OrbitalView() : earth(GL_EARTH_RADIUS, {.0f,.0f,1.0f}), satellite(GL_EARTH_RADIUS/2e1, {1.0f,0.0f,0.0f})
+OrbitalView::OrbitalView() : earth(GL_EARTH_RADIUS, {.0f,.75f,1.0f}), satellite(GL_EARTH_RADIUS/2e1, {1.0f,0.0f,0.0f})
 {
     shaderProgram = nullptr;
     initTransformationMatrices();

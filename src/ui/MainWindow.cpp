@@ -27,8 +27,8 @@ MainWindow::MainWindow()
 
     //TODO: add a menu for these & others
     loadNetworkFromCSV("resource/networks/GPS.csv");
-    //loadNetworkFromCSV("resource/networks/Kuiper_Network.csv");
-    //loadNetworkFromCSV("resource/networks/Starlink_Network.csv");
+    loadNetworkFromCSV("resource/networks/Kuiper_Network.csv");
+    loadNetworkFromCSV("resource/networks/Starlink_Network.csv");
 }
 
 void MainWindow::createGLWindow()
@@ -133,7 +133,6 @@ void MainWindow::rotateOrbital(double deltaX, double deltaY)
     orbitalView.rotateLeftRight(deltaX);
     orbitalView.rotateUpDown(deltaY);
 }
-
 
 void MainWindow::run()
 {
