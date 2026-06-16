@@ -32,6 +32,7 @@ public:
 private:
     void initTransformationMatrices();
     void calculateCameraPosition();
+    void renderSatellites(std::vector<std::array<double,3>> satellitePositions);
     void calculateSatModel(std::array<double,3> position);
 
     Cube satellite;

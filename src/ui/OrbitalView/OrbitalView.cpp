@@ -33,13 +33,8 @@ void OrbitalView::render(std::vector<std::array<double,3>> satellitePositions)
     view = glm::lookAt(cameraPos, glm::vec3(0.0f), glm::vec3(0, 1, 0));
     glUniformMatrix4fv(shaderProgram->getViewLoc(), 1, GL_FALSE, glm::value_ptr(view)); 
     
-    for(int i = 0; i < satellitePositions.size(); ++i)
-    {
-        calculateSatModel(satellitePositions[i]);
-        glUniformMatrix4fv(shaderProgram->getModelLoc(), 1, GL_FALSE, glm::value_ptr(model)); 
+    renderSatellites(satellitePositions);
 
-        satellite.render();
-    }
     model = glm::mat4(1.0f); 
     glUniformMatrix4fv(shaderProgram->getModelLoc(), 1, GL_FALSE, glm::value_ptr(model)); 
 
@@ -54,6 +49,16 @@ void OrbitalView::calculateCameraPosition()
     cameraPos.x = distance * cos(glm::radians(pitch)) * cos(glm::radians(yaw));
     cameraPos.y = distance * sin(glm::radians(pitch));
     cameraPos.z = distance * cos(glm::radians(pitch)) * sin(glm::radians(yaw));
+}
+
+void OrbitalView::renderSatellites(std::vector<std::array<double,3>> satellitePositions)
+{
+    for(int i = 0; i < satellitePositions.size(); ++i)
+    {
+        calculateSatModel(satellitePositions[i]);
+        glUniformMatrix4fv(shaderProgram->getModelLoc(), 1, GL_FALSE, glm::value_ptr(model)); 
+        satellite.render();
+    }
 }
 
 void OrbitalView::calculateSatModel(std::array<double,3> position)
