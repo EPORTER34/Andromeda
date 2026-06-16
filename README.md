@@ -20,7 +20,6 @@ backend: <br>
 <br>
 
 frontend: <br>
-  pan left/right on OrbitalView <br>
   viewing pannels <br>
     satellite numbers (with dropdown for orbital elements?) <br>
     doppler effect <br>
