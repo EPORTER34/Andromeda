@@ -128,6 +128,13 @@ void MainWindow::zoomOrbitalOut()
     std::cout << "Orbital View Zoomed Out" << std::endl; 
 }
 
+void MainWindow::rotateOrbital(double deltaX, double deltaY)
+{
+    orbitalView.rotateLeftRight(deltaX);
+    orbitalView.rotateUpDown(deltaY);
+}
+
+
 void MainWindow::run()
 {
     while(!glfwWindowShouldClose(window))

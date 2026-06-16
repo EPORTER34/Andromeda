@@ -19,6 +19,7 @@ public:
     void setSimSpeed(float newSpeed);
     void zoomOrbitalIn();
     void zoomOrbitalOut();
+    void rotateOrbital(double deltaX, double deltaY);
 
 private:
     void createGLWindow();

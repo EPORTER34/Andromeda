@@ -9,6 +9,7 @@ void Input::setCallbackFunctions(GLFWwindow* window)
     glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
     glfwSetScrollCallback(window, scrollCallback);
     glfwSetMouseButtonCallback(window, mouseButtonCallback);
+    glfwSetCursorPosCallback(window, cursorPositionCallback);
 }
 
 void Input::framebufferSizeCallback(GLFWwindow* window, int width, int height)
@@ -49,19 +50,45 @@ void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, i
 
 void Input::scrollCallback(GLFWwindow* window, double horzScroll, double vertScroll)
 {
+    //TODO: when theres other windows, add a position constraint here
+
     MainWindow* UI = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
     if(vertScroll > 0) UI->zoomOrbitalIn();
     else UI->zoomOrbitalOut();
 }
 
-bool leftMouseHeld = false, rightMouseHeld = false; //put into namespace?
+bool leftMouseHeld = false;
 void Input::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
+    //TODO: when theres other windows, add a position constraint here
+
     if (button == GLFW_MOUSE_BUTTON_LEFT)
     {
         if (action == GLFW_PRESS)
             leftMouseHeld = true;
         else if (action == GLFW_RELEASE)
             leftMouseHeld = false;
+    }
+}
+
+double mouseX = 0.0, mouseY = 0.0;
+void Input::cursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
+{
+    //TODO: when theres other windows, add a position constraint here
+
+    if(leftMouseHeld)
+    {
+        MainWindow* UI = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
+        double deltaX = 0.0, deltaY = 0.0;
+        deltaX = xpos - mouseX;
+        deltaY = ypos - mouseY;
+        UI->rotateOrbital(deltaX, deltaY);
+        mouseX = xpos;
+        mouseY = ypos;
+    }
+    else
+    {
+        mouseX = xpos;
+        mouseY = ypos;
     }
 }

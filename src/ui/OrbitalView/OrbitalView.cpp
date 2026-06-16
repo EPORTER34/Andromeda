@@ -1,6 +1,7 @@
 #include "OrbitalView.hpp"
 
 #include <iostream>
+#include <cmath>
 
 OrbitalView::OrbitalView() : earth(GL_EARTH_RADIUS, {.0f,.0f,1.0f}), satellite(GL_EARTH_RADIUS/2e1, {1.0f,0.0f,0.0f})
 {
@@ -79,4 +80,16 @@ void OrbitalView::zoomIn()
 void OrbitalView::zoomOut()
 {
     if(distance < 20 * GL_EARTH_RADIUS) distance += .1f;
+}
+
+void OrbitalView::rotateLeftRight(double deltaX)
+{
+    yaw += deltaX * ROTATE_SENSITIVITY;
+}
+
+void OrbitalView::rotateUpDown(double deltaY)
+{
+    pitch += deltaY * ROTATE_SENSITIVITY;
+    if(pitch > 89.9) pitch = 89.9;
+    if(pitch < -89.9) pitch = -89.9;
 }
