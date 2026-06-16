@@ -34,8 +34,8 @@ readme<br>
   actually document (assumptions made, features, design decisions) <br>
 
 
-Losses <br>
-Atmospheric Gas Absorption <br>
+##Losses <br>
+###Atmospheric Gas Absorption <br>
 Atmospheric gas absoprtion in this model is approximated using the formula <br>
 A<sub>atm</sub> = γ(f) * L<sub>eff</sub> / sin(θ) <br>
 where: <br>
