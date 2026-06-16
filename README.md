@@ -37,7 +37,7 @@ readme<br>
 ## Losses <br>
 ### Atmospheric Gas Absorption <br>
 Atmospheric gas absoprtion in this model is approximated using the formula <br>
-''' A<sub>atm</sub> = γ(f) * L<sub>eff</sub> / sin(θ) <br>
+> A<sub>atm</sub> = γ(f) * L<sub>eff</sub> / sin(θ) <br>
 where: <br>
 L<sub>eff</sub> = 8 km (assumed atmosphere thickness) <br>
 θ = elevation angle between the satellite & ground <br>
