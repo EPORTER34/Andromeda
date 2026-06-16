@@ -24,6 +24,7 @@ add_executable(SAT_NETWORK_SIM
     src/glad.c
 
     src/sim/Satellite/Satellite.cpp
+    src/sim/LinkBudget/LinkBudget.cpp
     src/sim/Doppler/Doppler.cpp
     src/sim/Orbit/Orbit.cpp
     src/sim/Sim.cpp
@@ -57,10 +58,12 @@ find_package(GTest REQUIRED)
 # =========================
 add_executable(tests
     tests/orbitTests.cpp
+    tests/linkBudgetTests.cpp
     tests/dopplerTests.cpp
 
     src/sim/Satellite/Satellite.cpp
     src/sim/Doppler/Doppler.cpp
+    src/sim/LinkBudget/LinkBudget.cpp
     src/sim/Orbit/Orbit.cpp
     src/sim/Sim.cpp
 

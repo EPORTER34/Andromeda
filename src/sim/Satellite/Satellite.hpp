@@ -1,4 +1,5 @@
 #include "../Orbit/Orbit.hpp"
+#include "../LinkBudget/LinkBudget.hpp"
 
 #include <array>
 #include <string>
