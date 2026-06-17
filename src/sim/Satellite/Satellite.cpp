@@ -1,8 +1,7 @@
 #include "Satellite.hpp"
 #include "../Doppler/Doppler.hpp"
 
-Satellite::Satellite(std::string newName, double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly)
- :orbit(newRadius,newInclination,newAscendingLongitude,newAnomaly)
+Satellite::Satellite(std::string newName, OrbitalElements newOrbit) : orbit(newOrbit)
 {
     name = newName;
 }
@@ -21,4 +20,10 @@ double Satellite::calculateDopplerShift(double carrierFrequency, std::array<doub
     std::array<double,3> satPos = orbit.computePositionECEF(simTime);
     std::array<double,3> satVel = orbit.computeVelocity(satPos);
     return Doppler::findDopperShift(carrierFrequency, satPos, baseSationPositionECEF, satVel);
+}
+
+Losses Satellite::calculateLosses(double carrierFrequency, std::array<double,3> baseStationPositionECEF, double simTime) const
+{
+    std::array<double,3> satPos = orbit.computePositionECEF(simTime);
+    return LinkBudget::calculateLosses(carrierFrequency, baseStationPositionECEF, satPos);
 }

@@ -4,37 +4,40 @@
 
 #include <cmath>
 
-OrbitalElements::OrbitalElements(double newRadius, double newInlination, double newAscendingLongitude, double newAnomaly)
+OrbitalElements::OrbitalElements()
+{
+    radius = inclination = RAAN = initialAnomaly = 0;
+}
+
+OrbitalElements::OrbitalElements(double newRadius, double newInclination, double newRAAN, double newAnomaly)
 {
     radius = newRadius;
-    inclination = newInlination;
-    ascendingLongitude = newAscendingLongitude;
+    inclination = newInclination;
+    RAAN = newRAAN;
     initialAnomaly = newAnomaly;
 }
 
 //angles are in radians
-Orbit::Orbit(double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly) 
-: orbitalElements(newRadius,newInclination,newAscendingLongitude,newAnomaly)
+Orbit::Orbit(OrbitalElements newOrbit) : orbit(newOrbit)
 {
-    orbitalAngularVelocity = sqrt(MU_EARTH / pow(newRadius,3));
-    cosO = cos(newAscendingLongitude);
-    sinO = sin(newAscendingLongitude);
-    cosI = cos(newInclination);
-    sinI = sin(newInclination);
+    orbitalAngularVelocity = sqrt(MU_EARTH / pow(orbit.radius,3));
+    cosO = cos(orbit.RAAN);
+    sinO = sin(orbit.RAAN);
+    cosI = cos(orbit.inclination);
+    sinI = sin(orbit.inclination);
     normalVector = {sinI * sinO, -sinI * sinO, cosI};
-    velocity = orbitalAngularVelocity * newRadius;
+    velocity = orbitalAngularVelocity * orbit.radius;
 }
 
 std::array<double, 3> Orbit::computePositionECI(double simulationTime) const
 {
-    double trueAnomaly = fmod(orbitalAngularVelocity * simulationTime + orbitalElements.initialAnomaly, 2*PI);
+    double trueAnomaly = fmod(orbitalAngularVelocity * simulationTime + orbit.initialAnomaly, 2*PI);
     double cosV = cos(trueAnomaly), sinV = sin(trueAnomaly);
-    double orbitalRadius = orbitalElements.radius;
     
     //standard inclined circular orbit equations for ECI
-    double ECIx = orbitalRadius * (cosO * cosV - sinO * sinV * cosI);
-    double ECIy = orbitalRadius * (sinO * cosV + cosO * sinV * cosI);
-    double ECIz = orbitalRadius * sinV * sinI;
+    double ECIx = orbit.radius * (cosO * cosV - sinO * sinV * cosI);
+    double ECIy = orbit.radius * (sinO * cosV + cosO * sinV * cosI);
+    double ECIz = orbit.radius * sinV * sinI;
 
     return {ECIx, ECIy, ECIz};
 }

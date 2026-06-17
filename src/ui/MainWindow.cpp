@@ -94,19 +94,21 @@ void MainWindow::loadNetworkFromCSV(std::string filePath)
         std::getline(ss, field, ',');
         std::string name = field;
 
-        std::getline(ss, field, ',');
-        double radius = 1e3 * std::stod(field);
+        OrbitalElements newOrbit;
 
         std::getline(ss, field, ',');
-        double inclination = degToRad * std::stod(field);
+        newOrbit.radius = 1e3 * std::stod(field);
 
         std::getline(ss, field, ',');
-        double raan = degToRad * std::stod(field);
+        newOrbit.inclination = degToRad * std::stod(field);
 
         std::getline(ss, field, ',');
-        double initialAnomaly = degToRad * std::stod(field);
+        newOrbit.RAAN = degToRad * std::stod(field);
 
-        sim.addSatellite(name, radius, inclination, raan, initialAnomaly);
+        std::getline(ss, field, ',');
+        newOrbit.initialAnomaly = degToRad * std::stod(field);
+
+        sim.addSatellite(name, newOrbit);
     }
 }
 

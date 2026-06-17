@@ -4,12 +4,20 @@
 
 #include <cmath>
 
+void Losses::sumLosses()
+{
+    totalLoss += freeSpaceLoss;
+    totalLoss += atmosphericAbsorptionLoss;
+}
+
 Losses LinkBudget::calculateLosses(double carrierFrequency, std::array<double,3> baseStationPos, std::array<double,3> satellitePos)
 {
     Losses losses;
     losses.freeSpaceLoss = calculateFreeSpaceLoss(carrierFrequency, baseStationPos, satellitePos);
     losses.atmosphericAbsorptionLoss = calculateAtmosphericAbsorptionLoss(carrierFrequency, baseStationPos, satellitePos);
 
+
+    losses.sumLosses();
     return losses;
 }
 

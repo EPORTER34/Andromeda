@@ -4,10 +4,12 @@
 class OrbitalElements
 {
 public:
-    OrbitalElements(double newRadius, double newInlination, double newAscendingLongitude, double newAnomaly);
+    OrbitalElements();
+    OrbitalElements(double newRadius, double newInclination, double newRAAN, double newAnomaly);
+    
     double initialAnomaly;
     double radius;
-    double ascendingLongitude;
+    double RAAN;
     double inclination;
     //NOTE: ORBIT ASSUMED CIRCULAR
 };
@@ -15,7 +17,7 @@ public:
 class Orbit
 {
 public:
-    Orbit(double newRadius, double newInclination, double newAscendingLongitude, double newAnomaly);
+    Orbit(OrbitalElements newOrbit);
 
     std::array<double, 3> computePositionECI(double simulationTime) const;
     std::array<double, 3> computePositionECEF(double simulationTime) const;
@@ -23,7 +25,7 @@ public:
     std::array<double, 3> computeVelocity(std::array<double,3> position) const;
 
 private:
-    OrbitalElements orbitalElements;
+    OrbitalElements orbit;
     double orbitalAngularVelocity;
 
     //constants used in calculating position
