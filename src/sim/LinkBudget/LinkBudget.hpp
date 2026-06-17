@@ -14,5 +14,5 @@ namespace LinkBudget
 {
     Losses calculateLosses(double carrierFrequency, std::array<double,3> baseStationPos, std::array<double,3> satellitePos);
     double calculateFreeSpaceLoss(double carrierFrequency, std::array<double,3> baseStationPos, std::array<double,3> satellitePos);
-    double calculateAtmosphericAbsorptionLoss();
+    double calculateAtmosphericAbsorptionLoss(double carrierFrequency, std::array<double,3> baseStationPos, std::array<double,3> satellitePos);
 }

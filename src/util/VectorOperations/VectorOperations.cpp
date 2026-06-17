@@ -2,31 +2,40 @@
 
 #include <cmath>
 
+constexpr short int X = 0;
+constexpr short int Y = 1;
+constexpr short int Z = 2;
+
 std::array<double,3> VecOps::difference(std::array<double,3> minuend, std::array<double,3> subtrahend)
 {
-	return {minuend[0] - subtrahend[0], minuend[1] - subtrahend[1], minuend[2] - subtrahend[2]};
+	return {minuend[X] - subtrahend[X], minuend[Y] - subtrahend[Y], minuend[Z] - subtrahend[Z]};
+}
+
+double VecOps::magnitude(std::array<double,3> vector)
+{
+    return sqrt(pow(vector[X],Z) + pow(vector[Y],Z) + pow(vector[Z],Z));
 }
 
 std::array<double ,3> VecOps::normalize(std::array<double,3> vector)
 {
-	double length = sqrt(pow(vector[0],2)+pow(vector[1],2)+pow(vector[2],2));
-	return {vector[0] / length, vector[1] / length, vector[2] / length };
+	double length = magnitude(vector);
+	return {vector[X] / length, vector[Y] / length, vector[Z] / length };
 }
 
 double VecOps::dotProduct(std::array<double,3> a, std::array<double,3> b)
 {
-	return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+	return a[X]*b[X] + a[Y]*b[Y] + a[Z]*b[Z];
 }
 
 std::array<double,3> VecOps::crossProduct(std::array<double,3> a, std::array<double,3> b)
 {
-    double x = a[2]*b[3] - a[3]*b[2],
-    y = a[3]*b[1] - a[1]*b[3],
-    z = a[1]*b[2] - a[2]*b[1];
+    double x = a[Y]*b[Z] - a[Z]*b[Y],
+    y = a[Z]*b[X] - a[X]*b[Z],
+    z = a[X]*b[Y] - a[Y]*b[X];
     return {x,y,z};
 }
 
 std::array<double,3> VecOps::distributeConstant(std::array<double,3> vec, double k)
 {
-    return {vec[0] * k, vec[1] * k, vec[2] * k};
+    return {vec[X] * k, vec[Y] * k, vec[Z] * k};
 }

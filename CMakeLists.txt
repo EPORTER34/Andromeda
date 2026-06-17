@@ -60,6 +60,7 @@ add_executable(tests
     tests/orbitTests.cpp
     tests/linkBudgetTests.cpp
     tests/dopplerTests.cpp
+    tests/VecOpsTests.cpp
 
     src/sim/Satellite/Satellite.cpp
     src/sim/Doppler/Doppler.cpp

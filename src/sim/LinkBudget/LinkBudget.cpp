@@ -1,5 +1,6 @@
 #include "LinkBudget.hpp"
 #include "../../util/constants.hpp"
+#include "../../util/VectorOperations/VectorOperations.hpp"
 
 #include <cmath>
 
@@ -7,7 +8,7 @@ Losses LinkBudget::calculateLosses(double carrierFrequency, std::array<double,3>
 {
     Losses losses;
     losses.freeSpaceLoss = calculateFreeSpaceLoss(carrierFrequency, baseStationPos, satellitePos);
-    
+    losses.atmosphericAbsorptionLoss = calculateAtmosphericAbsorptionLoss(carrierFrequency, baseStationPos, satellitePos);
 
     return losses;
 }
@@ -15,10 +16,21 @@ Losses LinkBudget::calculateLosses(double carrierFrequency, std::array<double,3>
 constexpr double FREE_SPACE_CONST = 4 * PI / C;
 double LinkBudget::calculateFreeSpaceLoss(double carrierFrequency, std::array<double,3> baseStationPos, std::array<double,3> satellitePos)
 {
-    double deltaX = baseStationPos[0] - satellitePos[0];
-    double deltaY = baseStationPos[1] - satellitePos[1];
-    double deltaZ = baseStationPos[2] - satellitePos[2];
-    double distance = sqrt(pow(deltaX,2) + pow(deltaY,2) + pow(deltaZ,2));
-
+    std::array<double,3> displacement = VecOps::difference(baseStationPos, satellitePos);
+    double distance = VecOps::magnitude(displacement);
     return 20 * log10(FREE_SPACE_CONST * distance * carrierFrequency);
+}
+
+constexpr double L_EFF = 8; //effective atmosphere thickness [km]
+double LinkBudget::calculateAtmosphericAbsorptionLoss(double carrierFrequency, std::array<double,3> baseStationPos, std::array<double,3> satellitePos)
+{
+    double fGHz = carrierFrequency / 1e9;
+    double f2 = fGHz * fGHz;
+    double surfaceAttenuation = .002 * f2 / (f2 + 25) + .0035 * f2 / (f2 + 9);
+
+    std::array<double,3> unitDisplacement = VecOps::normalize(VecOps::difference(satellitePos, baseStationPos));
+    std::array<double,3> unitBasePos = VecOps::normalize(baseStationPos);
+    double sinElevationAngle = VecOps::dotProduct(unitDisplacement, unitBasePos); 
+    
+    return surfaceAttenuation * L_EFF / sinElevationAngle;
 }
