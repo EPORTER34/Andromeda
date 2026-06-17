@@ -13,7 +13,7 @@ std::array<double,3> VecOps::difference(std::array<double,3> minuend, std::array
 
 double VecOps::magnitude(std::array<double,3> vector)
 {
-    return sqrt(pow(vector[X],Z) + pow(vector[Y],Z) + pow(vector[Z],Z));
+    return sqrt(pow(vector[X],2) + pow(vector[Y],2) + pow(vector[Z],2));
 }
 
 std::array<double ,3> VecOps::normalize(std::array<double,3> vector)
