@@ -46,8 +46,8 @@ Using these elements, position in ECI is then calculated using a series of rotat
 y: r * (sin(O)cos(v) + cos(O)sin(v)cos(I)) <br>
 z: r * sin(v)sin(I) <br>
 
-anomaly is calculated by using the angular velocity of the satellite & multiplying it by time <br>
-when the position is required in ECEF coordinates <br>
+Anomaly is calculated by using the angular velocity of the satellite & multiplying it by time. <br>
+When the position is required in ECEF coordinates: <br>
 > x<sub>ECEF</sub> = x<sub>ECI</sub>cos(θ) + y<sub>ECI</sub>sin(θ) <br>
 y<sub>ECEF</sub> = -x<sub>ECI</sub>sin(θ) + y<sub>ECI</sub>cos(θ) <br>
 z<sub>ECEF</sub> = z<sub>ECI</sub>
