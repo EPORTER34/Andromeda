@@ -54,7 +54,10 @@ z<sub>ECEF</sub> = z<sub>ECI</sub>
 
 Where θ is calculated by multiplying the earth's angular velocity by simulation time
 ### Velocity
-put velocity calculations here
+Velocity is calculated by taking the cross product between the orbital plane's normal vector, & the normalized position vector (ECI or ECEF), and then multiplying the result by the constant orbital velocity <br>
+The orbital plane's normal vector is calculated using orbital elements as follows: <br>
+> (sin(I)sin(Ω), -sin(I)sin(Ω), cos(I))
+
 ## Doppler Compensation <br>
 nothing here yet <br>
 ## Losses <br>
