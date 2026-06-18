@@ -36,14 +36,16 @@ readme<br>
 ## Orbital Propagation <br>
 ### Position
 Satellite orbits are assumed to be circular and are represented using four keplerian orbital elements detailed below: <br>
-Orbital Radius       (r) <br>
+> Orbital Radius       (r) <br>
 Inclination          (I) <br>
 Ascending Longitude  (O) <br>
 Anomaly              (v) <br>
+
 Using these elements, position in ECI is then calculated using a series of rotations that result in the following equations: <br>
-x: r * (cos(O)cos(v) - sin(O)sin(v)cos(I)) <br>
+> x: r * (cos(O)cos(v) - sin(O)sin(v)cos(I)) <br>
 y: r * (sin(O)cos(v) + cos(O)sin(v)cos(I)) <br>
 z: r * sin(v)sin(I) <br>
+
 when the position is required in ECEF coordinates <br>
 put explanation on rotating by the amount earth has rotated here
 ### Velocity
