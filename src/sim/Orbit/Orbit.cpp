@@ -25,7 +25,7 @@ Orbit::Orbit(OrbitalElements newOrbit) : orbit(newOrbit)
     sinO = sin(orbit.RAAN);
     cosI = cos(orbit.inclination);
     sinI = sin(orbit.inclination);
-    normalVector = {sinI * sinO, -sinI * sinO, cosI};
+    normalVector = {sinI * sinO, -sinI * cosO, cosI};
     velocity = orbitalAngularVelocity * orbit.radius;
 }
 
