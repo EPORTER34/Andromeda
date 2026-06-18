@@ -59,7 +59,10 @@ The orbital plane's normal vector is calculated using orbital elements as follow
 > (sin(I)sin(Ω), -sin(I)sin(Ω), cos(I))
 
 ## Doppler Compensation <br>
-nothing here yet <br>
+The doppler shift is calculated using the following formula:<br>
+>  f<sub>d</sub> = f<sub>c</sub> * v<sub>r</sub> / c <br>
+
+Where v<sub>r</sub> is the radial velocity, calculated by taking the dot product of the satellite velocity and the normalized displacement vector (all in ECEF)
 ## Losses <br>
 ### Free Space <br>
 Free space losses are calculated using the following formula: <br>
