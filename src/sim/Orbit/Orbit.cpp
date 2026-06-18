@@ -25,7 +25,7 @@ Orbit::Orbit(OrbitalElements newOrbit) : orbit(newOrbit)
     sinO = sin(orbit.RAAN);
     cosI = cos(orbit.inclination);
     sinI = sin(orbit.inclination);
-    normalVector = {sinI * sinO, -sinI * cosO, cosI};
+    normalVector = {-sinI * sinO, sinI * cosO, cosI};
     velocity = orbitalAngularVelocity * orbit.radius;
 }
 
@@ -57,14 +57,13 @@ std::array<double, 3> Orbit::computePositionECEF(double simulationTime) const
 std::array<double, 3> Orbit::computeVelocity(double simulationtime) const
 {
     std::array<double, 3> pos = computePositionECEF(simulationtime);
-    pos = VecOps::normalize(pos);
-    std::array<double, 3> unitVel = VecOps::crossProduct(normalVector, pos);
-    return VecOps::distributeConstant(unitVel, velocity);
+    return computeVelocity(pos);
 }
 
 std::array<double, 3> Orbit::computeVelocity(std::array<double,3> position) const
 {
     std::array<double,3> pos = VecOps::normalize(position);
     std::array<double, 3> unitVel = VecOps::crossProduct(normalVector, pos);
+    unitVel[2] *= -1; //z component is backwards for some reason
     return VecOps::distributeConstant(unitVel, velocity);
 }

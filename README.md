@@ -56,7 +56,7 @@ Where θ is calculated by multiplying the earth's angular velocity by simulation
 ### Velocity
 Velocity is calculated by taking the cross product between the orbital plane's normal vector, & the normalized position vector (ECI or ECEF), and then multiplying the result by the constant orbital velocity <br>
 The orbital plane's normal vector is calculated using orbital elements as follows: <br>
-> (sin(I)sin(Ω), -sin(I)cos(Ω), cos(I))
+> (-sin(I)sin(Ω), sin(I)cos(Ω), cos(I))
 
 ## Doppler Compensation <br>
 The doppler shift is calculated using the following formula:<br>

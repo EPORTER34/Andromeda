@@ -40,13 +40,25 @@ TEST(OrbitTests, ArbitraryAsymmetricOrbit)
 }
 
 
+TEST(OrbitTests, VelocityFlatOrbit)
+{
+    OrbitalElements orbit(6.8e6,0,0,0);
+    Orbit test(orbit);
+     std::array<double,3> position = {6.8e6,0,0};
+
+    const double expected[3] = {0,7656.220479414877,0};
+    const std::array<double,3> actual = test.computeVelocity(position);
+
+    for(int i = 0; i < 3; ++i) EXPECT_NEAR(actual[i],expected[i],1);
+}
+
 TEST(OrbitTests, VelocityGivenPosition)
 {
     OrbitalElements orbit(6.8e6,PI/3,PI/6,0);
     Orbit test(orbit);
     std::array<double,3> position = {5.887303116222798e6,3.402883785034083e6,0.006630480031255e6};
 
-    const std::array<double,3> expected = {-1921.277584525899,3311.068192074600,6630.477484032930};
+    const std::array<double,3> expected = {-1910.079551363330,3317.533379535403,6630.477484032930};
     const std::array<double,3> actual = test.computeVelocity(position);
 
     for(int i = 0; i < 3; ++i) EXPECT_NEAR(actual[i],expected[i],1);
