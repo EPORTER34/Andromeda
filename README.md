@@ -38,12 +38,12 @@ readme<br>
 Satellite orbits are assumed to be circular and are represented using four keplerian orbital elements detailed below: <br>
 > Orbital Radius       (r) <br>
 Inclination          (I) <br>
-Ascending Longitude  (O) <br>
+Ascending Longitude  (Ω) <br>
 Anomaly              (v) <br>
 
 Using these elements, position in ECI is then calculated using a series of rotations that result in the following equations: <br>
-> x: r * (cos(O)cos(v) - sin(O)sin(v)cos(I)) <br>
-y: r * (sin(O)cos(v) + cos(O)sin(v)cos(I)) <br>
+> x: r * (cos(Ω)cos(v) - sin(Ω)sin(v)cos(I)) <br>
+y: r * (sin(Ω)cos(v) + cos(Ω)sin(v)cos(I)) <br>
 z: r * sin(v)sin(I) <br>
 
 Anomaly is calculated by using the angular velocity of the satellite & multiplying it by time. <br>
