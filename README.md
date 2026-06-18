@@ -33,7 +33,23 @@ frontend: <br>
 readme<br>
   actually document (assumptions made, features, design decisions) <br>
 
-
+## Orbital Propagation <br>
+### Position
+Satellite orbits are assumed to be circular and are represented using four keplerian orbital elements detailed below: <br>
+Orbital Radius       (r) <br>
+Inclination          (I) <br>
+Ascending Longitude  (O) <br>
+Anomaly              (v) <br>
+Using these elements, position in ECI is then calculated using a series of rotations that result in the following equations: <br>
+x: r * (cos(O)cos(v) - sin(O)sin(v)cos(I)) <br>
+y: r * (sin(O)cos(v) + cos(O)sin(v)cos(I)) <br>
+z: r * sin(v)sin(I) <br>
+when the position is required in ECEF coordinates <br>
+put explanation on rotating by the amount earth has rotated here
+### Velocity
+put velocity calculations here
+## Doppler Compensation <br>
+nothing here yet <br>
 ## Losses <br>
 ### Atmospheric Gas Absorption <br>
 Atmospheric gas absoprtion in this model is approximated using the formula: <br>
