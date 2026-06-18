@@ -61,6 +61,11 @@ The orbital plane's normal vector is calculated using orbital elements as follow
 ## Doppler Compensation <br>
 nothing here yet <br>
 ## Losses <br>
+### Free Space <br>
+Free space losses are calculated using the following formula: <br>
+> 4π/c * f<sub>c</sub> * d <br>
+
+Where d is the distance between the base station and the receiver <br>
 ### Atmospheric Gas Absorption <br>
 Atmospheric gas absoprtion in this model is approximated using the formula: <br>
 > A<sub>atm</sub> = γ(f) * L<sub>eff</sub> / sin(θ) <br>
