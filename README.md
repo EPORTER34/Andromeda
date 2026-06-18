@@ -52,7 +52,7 @@ When the position is required in ECEF coordinates: <br>
 y<sub>ECEF</sub> = -x<sub>ECI</sub>sin(θ) + y<sub>ECI</sub>cos(θ) <br>
 z<sub>ECEF</sub> = z<sub>ECI</sub>
 
-Where theta is calculated by multiplying the earth's angular velocity by simulation time
+Where θ is calculated by multiplying the earth's angular velocity by simulation time
 ### Velocity
 put velocity calculations here
 ## Doppler Compensation <br>
