@@ -13,5 +13,6 @@ TEST(LinkBudgetTests, FreeSpaceLoss)
 
 TEST(LinkBudgetTests, AtmosphericGasAborption)
 {
-    //TODO: make this test
+    double loss = LinkBudget::calculateAtmosphericAbsorptionLoss(12e9, {6.378e6,0,0}, {5.888972745734182e6,3.4e6,0});
+    EXPECT_NEAR(0.280867219673116, loss, 1e-9);
 }

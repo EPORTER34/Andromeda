@@ -16,6 +16,7 @@ public:
     void addSatellite(std::string newName, OrbitalElements newOrbit);
     std::vector<std::array<double,3>> getSatellitePositionsECI();
     std::vector<double> getDopplerShifts(double carrierFrequency, std::array<double,3> baseStationPos);
+    std::vector<Losses> calculateLosses(double carrierFrequency, std::array<double,3> baseStationPos);
     
 private:
     std::vector<Satellite> satellites;

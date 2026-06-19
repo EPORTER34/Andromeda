@@ -54,3 +54,14 @@ std::vector<double> Simulation::getDopplerShifts(double carrierFrequency, std::a
     }
     return dopplerShifts;
 }
+
+std::vector<Losses> Simulation::calculateLosses(double carrierFrequency, std::array<double,3> baseStationPos)
+{
+    std::vector<Losses> losses;
+    for(int i = 0; i < satellites.size(); ++i)
+    {
+        Losses loss = satellites[i].calculateLosses(carrierFrequency, baseStationPos, time);
+        losses.push_back(loss);
+    }
+    return losses;
+}

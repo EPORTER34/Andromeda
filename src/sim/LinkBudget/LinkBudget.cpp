@@ -39,6 +39,7 @@ double LinkBudget::calculateAtmosphericAbsorptionLoss(double carrierFrequency, s
     std::array<double,3> unitDisplacement = VecOps::normalize(VecOps::difference(satellitePos, baseStationPos));
     std::array<double,3> unitBasePos = VecOps::normalize(baseStationPos);
     double sinElevationAngle = VecOps::dotProduct(unitDisplacement, unitBasePos); 
-    
+    if(sinElevationAngle < 0) sinElevationAngle *= -1;
+
     return surfaceAttenuation * L_EFF / sinElevationAngle;
 }
