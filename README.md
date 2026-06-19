@@ -11,9 +11,6 @@ the attenuation from mean annual global is then approximated with the formula y_
 
 todo: <br>
 backend: <br>
-  - sat obrital mechanics <br>
-    - tle parsing <br>
-    - sgp4 propogation <br>
   - ground to sat comm <br>
     - link budget analysis <br>
     - path loss/SNR <br>
