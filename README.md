@@ -77,5 +77,5 @@ L<sub>eff</sub> = 8 km (assumed atmosphere thickness) <br>
 γ(f) = surface specific attenuation, which is given by the approximation: <br>
 > γ(f) = .002 * f<sup>2</sup> / (f<sup>2</sup> + 25) + .0035 * f<sup>2</sup> / (f<sup>2</sup> + 9) <br>
 
-Which comes from the standard γ function detailed in ITU-R P.676, where the mean global annual atmosphere is used. 
+Which comes from the standard γ function detailed in ITU-R P.676, which details losses from O<sub>2</sub> & H<sub>2</sub>O gasses, where the mean global annual atmosphere is used to determine the constant parameters. 
 This model gives a rough approximation for frequencys < 40 GHz, but the water vapor resonance peak at ~22 GHz is not accurate. <br>
