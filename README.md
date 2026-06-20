@@ -66,6 +66,7 @@ Free space losses are calculated using the following formula: <br>
 > 4π/c * f<sub>c</sub> * d <br>
 
 Where d is the distance between the base station and the receiver <br>
+
 ### Atmospheric Gas Absorption <br>
 Atmospheric gas absoprtion in this model is approximated using the formula: <br>
 > A<sub>atm</sub> = γ(f) * L<sub>eff</sub> / sin(θ) <br>
@@ -79,3 +80,13 @@ L<sub>eff</sub> = 8 km (assumed atmosphere thickness) <br>
 
 Which comes from the standard γ function detailed in ITU-R P.676, which details losses from O<sub>2</sub> & H<sub>2</sub>O gasses, where the mean global annual atmosphere is used to determine the constant parameters. 
 This model gives a rough approximation for frequencys < 40 GHz, but the water vapor resonance peak at ~22 GHz is not accurate. <br>
+
+### Rain Fading <br>
+Calculation for rain fading beings with R<sub>.01</sub> rate that is detailed in ITU-R P.837. For this simulation a rate of <br>
+> R<sub>.01</sub> = 100 mm/hr <br>
+is used as an extreme yet plausible rainfall maximum. <br>
+The rainfall rate is then used in an equation from ITU-R P.838 to calculate specific attenuation as follows:
+> γ<sub>R</sub> = kR<sub>.01</sub><sup>α</sup> <br>
+Where:
+k =  <br>
+α =  <br>
