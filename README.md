@@ -85,8 +85,8 @@ This model gives a rough approximation for frequencys < 40 GHz, but the water va
 Calculation for rain fading beings with R<sub>.01</sub> rate that is detailed in ITU-R P.837. For this simulation a rate of <br>
 > R<sub>.01</sub> = 100 mm/hr <br>
 is used as an extreme yet plausible rainfall maximum. <br>
-The rainfall rate is then used in an equation from ITU-R P.838 to calculate specific attenuation as follows:
+The rainfall rate is then used in an equation from ITU-R P.838 to calculate specific attenuation as follows: <br>
 > γ<sub>R</sub> = kR<sub>.01</sub><sup>α</sup> <br>
-Where:
+Where: <br>
 k =  <br>
 α =  <br>
