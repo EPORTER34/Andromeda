@@ -89,6 +89,16 @@ is used as an extreme yet plausible rainfall maximum. <br>
 The rainfall rate is then used in an equation from ITU-R P.838 to calculate specific attenuation as follows: <br>
 > γ<sub>R</sub> = kR<sub>.01</sub><sup>α</sup> <br>
 
-Where: <br>
-k =  <br>
-α =  <br>
+Where α & k are calculated using the following lookup table:  <br>
+Frequency (GHz) |	k (H-pol) |	α <br>
+4	              | 0.0001    |	1.0 <br>
+6	              | 0.0005    |	1.0 <br>
+10              |	0.012	    | 1.25 <br>
+12              |	0.018	    | 1.20 <br>
+14              |	0.035     |	1.10 <br>
+20              |	0.075     |	1.05 <br>
+30              |	0.22      |	0.95 <br>
+40              |	0.40      |	0.90 <br>
+50              |	0.65      |	0.85 <br>
+Any value that is not explicitly on the table is approximated using the difference between the two adjacent points.
+Any frequency below 4 GHz is assumed to have negligible rain loss. <br>
