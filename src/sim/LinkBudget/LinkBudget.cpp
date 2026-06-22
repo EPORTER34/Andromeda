@@ -8,6 +8,7 @@ void Losses::sumLosses()
 {
     totalLoss += freeSpaceLoss;
     totalLoss += atmosphericAbsorptionLoss;
+    totalLoss += rainLoss;
 }
 
 Losses LinkBudget::calculateLosses(double carrierFrequency, std::array<double,3> baseStationPos, std::array<double,3> satellitePos)
@@ -15,7 +16,6 @@ Losses LinkBudget::calculateLosses(double carrierFrequency, std::array<double,3>
     Losses losses;
     losses.freeSpaceLoss = calculateFreeSpaceLoss(carrierFrequency, baseStationPos, satellitePos);
     losses.atmosphericAbsorptionLoss = calculateAtmosphericAbsorptionLoss(carrierFrequency, baseStationPos, satellitePos);
-
 
     losses.sumLosses();
     return losses;
@@ -36,10 +36,28 @@ double LinkBudget::calculateAtmosphericAbsorptionLoss(double carrierFrequency, s
     double f2 = fGHz * fGHz;
     double surfaceAttenuation = .002 * f2 / (f2 + 25) + .0035 * f2 / (f2 + 9);
 
+
+    //calculate elevation angle function
     std::array<double,3> unitDisplacement = VecOps::normalize(VecOps::difference(satellitePos, baseStationPos));
     std::array<double,3> unitBasePos = VecOps::normalize(baseStationPos);
     double sinElevationAngle = VecOps::dotProduct(unitDisplacement, unitBasePos); 
     if(sinElevationAngle < 0) sinElevationAngle *= -1;
 
     return surfaceAttenuation * L_EFF / sinElevationAngle;
+}
+
+double LinkBudget::calculateRainLoss(double carrierFrequency, std::array<double,3> baseStationPos, std::array<double,3> satellitePos)
+{
+    //calculate gamma function
+
+
+    //calculate elevation angle function
+    std::array<double,3> unitDisplacement = VecOps::normalize(VecOps::difference(satellitePos, baseStationPos));
+    std::array<double,3> unitBasePos = VecOps::normalize(baseStationPos);
+    double sinElevationAngle = VecOps::dotProduct(unitDisplacement, unitBasePos); 
+    if(sinElevationAngle < 0) sinElevationAngle *= -1;
+
+    //scaling path length by elevation angle
+
+    //return gamma * path length
 }
