@@ -102,3 +102,4 @@ Frequency (GHz) |	k (H-pol) |	α <br>
 50              |	0.65      |	0.85 <br>
 Any value that is not explicitly on the table is approximated using the difference between the two adjacent points.
 Any frequency below 4 GHz is assumed to have negligible rain loss. <br>
+Path length is determined by taking L<sub>eff</sub> = 4 km from ITU-R P.618. The path length is then divided by sin(θ), where theta is the elevation angle of the satellite <br>
