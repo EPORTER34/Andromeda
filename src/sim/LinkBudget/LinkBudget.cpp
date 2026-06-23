@@ -1,6 +1,7 @@
 #include "LinkBudget.hpp"
 #include "../../util/constants.hpp"
 #include "../../util/VectorOperations/VectorOperations.hpp"
+#include "LinkBudgetHelper.hpp"
 
 #include <cmath>
 
@@ -15,7 +16,10 @@ Losses LinkBudget::calculateLosses(double carrierFrequency, std::array<double,3>
 {
     Losses losses;
     losses.freeSpaceLoss = calculateFreeSpaceLoss(carrierFrequency, baseStationPos, satellitePos);
-    losses.atmosphericAbsorptionLoss = calculateAtmosphericAbsorptionLoss(carrierFrequency, baseStationPos, satellitePos);
+
+    double elevationAngle = LinkBudgetHelper::calculateElevationAngle(baseStationPos, satellitePos);
+    losses.atmosphericAbsorptionLoss = calculateAtmosphericAbsorptionLoss(carrierFrequency, elevationAngle);
+    losses.rainLoss = calculateRainLoss(carrierFrequency, elevationAngle);
 
     losses.sumLosses();
     return losses;
@@ -29,35 +33,19 @@ double LinkBudget::calculateFreeSpaceLoss(double carrierFrequency, std::array<do
     return 20 * log10(FREE_SPACE_CONST * distance * carrierFrequency);
 }
 
-constexpr double L_EFF = 8; //effective atmosphere thickness [km]
-double LinkBudget::calculateAtmosphericAbsorptionLoss(double carrierFrequency, std::array<double,3> baseStationPos, std::array<double,3> satellitePos)
+constexpr double atmsphereThick = 8; //effective atmosphere thickness [km]
+double LinkBudget::calculateAtmosphericAbsorptionLoss(double carrierFrequency, double elevationAngle)
 {
     double fGHz = carrierFrequency / 1e9;
     double f2 = fGHz * fGHz;
     double surfaceAttenuation = .002 * f2 / (f2 + 25) + .0035 * f2 / (f2 + 9);
 
-
-    //calculate elevation angle function
-    std::array<double,3> unitDisplacement = VecOps::normalize(VecOps::difference(satellitePos, baseStationPos));
-    std::array<double,3> unitBasePos = VecOps::normalize(baseStationPos);
-    double sinElevationAngle = VecOps::dotProduct(unitDisplacement, unitBasePos); 
-    if(sinElevationAngle < 0) sinElevationAngle *= -1;
-
-    return surfaceAttenuation * L_EFF / sinElevationAngle;
+    return surfaceAttenuation * atmsphereThick / sin(elevationAngle);
 }
 
-double LinkBudget::calculateRainLoss(double carrierFrequency, std::array<double,3> baseStationPos, std::array<double,3> satellitePos)
+constexpr double rainThick = 4; //effective rain thickness [km]
+double LinkBudget::calculateRainLoss(double carrierFrequency, double elevationAngle)
 {
-    //calculate gamma function
-
-
-    //calculate elevation angle function
-    std::array<double,3> unitDisplacement = VecOps::normalize(VecOps::difference(satellitePos, baseStationPos));
-    std::array<double,3> unitBasePos = VecOps::normalize(baseStationPos);
-    double sinElevationAngle = VecOps::dotProduct(unitDisplacement, unitBasePos); 
-    if(sinElevationAngle < 0) sinElevationAngle *= -1;
-
-    //scaling path length by elevation angle
-
-    //return gamma * path length
+    double gamma = LinkBudgetHelper::calculateRainGamma(carrierFrequency);
+    return gamma * rainThick / sin(elevationAngle);
 }

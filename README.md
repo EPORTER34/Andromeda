@@ -9,6 +9,9 @@ assuming earth is a sphere of radius 6378 km <br>
 for atmospheric gas absorption, the mean annual global atmosphere is used, as detailed in ITU-R P.835 <br>
 the attenuation from mean annual global is then approximated with the formula y_surf * L_eff / sin(theta) <br>
 
+Notes: <br>
+max frequency is 50 GHz <br>
+
 todo: <br>
 backend: <br>
   - ground to sat comm <br>

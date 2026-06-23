@@ -25,6 +25,7 @@ add_executable(SAT_NETWORK_SIM
 
     src/sim/Satellite/Satellite.cpp
     src/sim/LinkBudget/LinkBudget.cpp
+    src/sim/LinkBudget/LinkBudgetHelper.cpp
     src/sim/Doppler/Doppler.cpp
     src/sim/Orbit/Orbit.cpp
     src/sim/Sim.cpp
@@ -65,6 +66,7 @@ add_executable(tests
     src/sim/Satellite/Satellite.cpp
     src/sim/Doppler/Doppler.cpp
     src/sim/LinkBudget/LinkBudget.cpp
+    src/sim/LinkBudget/LinkBudgetHelper.cpp
     src/sim/Orbit/Orbit.cpp
     src/sim/Sim.cpp
 
