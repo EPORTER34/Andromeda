@@ -36,12 +36,12 @@ void Shader::createShaderProgram()
 
 unsigned int Shader::getShader(GLenum shaderType, std::string filePath)
 {
-    std::string shaderSource = readFile(filePath);
+    std::string shaderSource = readShaderProgram(filePath);
     const char* cShaderSource = shaderSource.c_str();
     return compileShader(shaderType, cShaderSource);
 }
 
-std::string Shader::readFile(std::string filePath)
+std::string Shader::readShaderProgram(std::string filePath)
 {
     std::ifstream file(filePath);
 

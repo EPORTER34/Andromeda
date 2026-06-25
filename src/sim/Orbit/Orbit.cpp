@@ -20,12 +20,14 @@ OrbitalElements::OrbitalElements(double newRadius, double newInclination, double
 //angles are in radians
 Orbit::Orbit(OrbitalElements newOrbit) : orbit(newOrbit)
 {
-    orbitalAngularVelocity = sqrt(MU_EARTH / pow(orbit.radius,3));
     cosO = cos(orbit.RAAN);
     sinO = sin(orbit.RAAN);
     cosI = cos(orbit.inclination);
     sinI = sin(orbit.inclination);
+
     normalVector = {-sinI * sinO, sinI * cosO, cosI};
+    
+    orbitalAngularVelocity = sqrt(MU_EARTH / pow(orbit.radius,3));
     velocity = orbitalAngularVelocity * orbit.radius;
 }
 

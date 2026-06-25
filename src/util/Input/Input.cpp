@@ -19,6 +19,8 @@ void Input::framebufferSizeCallback(GLFWwindow* window, int width, int height)
     glViewport(0,0,width,height);
 }
 
+
+float prevSimSpeed;
 void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     MainWindow* UI = static_cast<MainWindow*>(glfwGetWindowUserPointer(window));
@@ -32,19 +34,32 @@ void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, i
             std::cout << "Simulation Terminated" << std::endl;
             break;
         case GLFW_KEY_1:
-            UI->setSimSpeed(10);
+            UI->setSimSpeed(1);
             break;
         case GLFW_KEY_2:
-            UI->setSimSpeed(50);
+            UI->setSimSpeed(5);
             break;
         case GLFW_KEY_3:
-            UI->setSimSpeed(100);
+            UI->setSimSpeed(10);
             break;
         case GLFW_KEY_4:
-            UI->setSimSpeed(500);
+            UI->setSimSpeed(50);
             break;
         case GLFW_KEY_5:
+            UI->setSimSpeed(100);
+            break;
+        case GLFW_KEY_6:
+            UI->setSimSpeed(500);
+            break;
+        case GLFW_KEY_7:
             UI->setSimSpeed(1000);
+            break;
+        case GLFW_KEY_P:
+            prevSimSpeed = UI->getSimSpeed();
+            UI->setSimSpeed(0);
+            break;
+        case GLFW_KEY_O:
+            UI->setSimSpeed(prevSimSpeed);
             break;
         }
     }

@@ -12,6 +12,11 @@ void Simulation::runTimeStep()
     time += timeStep;
 }
 
+float Simulation::getTimeStep() const
+{
+    return timeStep;
+}
+
 void Simulation::setTimeStep(float newTimeStep)
 {
     timeStep = newTimeStep;

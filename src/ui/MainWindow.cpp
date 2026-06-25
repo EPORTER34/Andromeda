@@ -85,9 +85,6 @@ void MainWindow::loadNetworkFromCSV(std::string filePath)
 
     while (std::getline(input, line))
     {
-        if (line.empty())
-            continue;
-
         std::stringstream ss(line);
         std::string field;
 
@@ -110,6 +107,11 @@ void MainWindow::loadNetworkFromCSV(std::string filePath)
 
         sim.addSatellite(name, newOrbit);
     }
+}
+
+float MainWindow::getSimSpeed() const
+{
+    return sim.getTimeStep();
 }
 
 void MainWindow::setSimSpeed(float newSpeed)
@@ -136,10 +138,10 @@ void MainWindow::rotateOrbital(double deltaX, double deltaY)
     orbitalView.rotateUpDown(deltaY);
 }
 
- void MainWindow::resizeWindow(int width, int height)
- {
+void MainWindow::resizeWindow(int width, int height)
+{
     orbitalView.resizeWindow(width, height);
- }
+}
 
 void MainWindow::run()
 {

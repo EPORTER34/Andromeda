@@ -10,6 +10,7 @@ class Simulation
 public:
     Simulation();
     void runTimeStep();
+    float getTimeStep() const;
     void setTimeStep(float newTimeStep);
     double getSimTime() const;
     void setSimTime(double newSimTime);

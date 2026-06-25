@@ -3,6 +3,14 @@
 
 #include <cmath>
 
+double LinkBudgetHelper::sumLosses(const Losses& losses)
+{
+    double totalLoss = losses.freeSpaceLoss;
+    totalLoss += losses.atmosphericAbsorptionLoss;
+    totalLoss += losses.rainLoss;
+    return totalLoss;
+}
+
 double LinkBudgetHelper::calculateElevationAngle(std::array<double,3> baseStationPos, std::array<double,3> satellitePos)
 {
     std::array<double,3> unitDisplacement = VecOps::normalize(VecOps::difference(satellitePos, baseStationPos));

@@ -5,8 +5,6 @@
 class Losses
 {
 public:
-    void sumLosses();
-
     double totalLoss;
     double freeSpaceLoss;
     double atmosphericAbsorptionLoss;

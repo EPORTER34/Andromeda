@@ -21,7 +21,7 @@ public:
 
 private:
     unsigned int getShader(GLenum shaderType, std::string filePath);
-    std::string readFile(std::string filePath);
+    std::string readShaderProgram(std::string filePath);
     unsigned int compileShader(unsigned int type, const char *source);
 
     unsigned int shaderProgram;

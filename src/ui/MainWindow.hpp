@@ -16,6 +16,7 @@ public:
     MainWindow();
     ~MainWindow();
     void run();
+    float getSimSpeed() const;
     void setSimSpeed(float newSpeed);
     void zoomOrbitalIn();
     void zoomOrbitalOut();
