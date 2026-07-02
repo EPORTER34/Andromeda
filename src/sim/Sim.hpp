@@ -9,6 +9,9 @@ class Simulation
 {
 public:
     Simulation();
+    double getUplinkFreq() const;
+    double getDownLinkFreq() const;
+    void setTransmissionFreqs(double newUplink, double newDownlink);
     void runTimeStep();
     float getTimeStep() const;
     void setTimeStep(float newTimeStep);
@@ -24,4 +27,5 @@ private:
 
     float timeStep;
     double time;
+    double uplinkFreq, downlinkFreq;
 };

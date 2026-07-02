@@ -26,9 +26,10 @@ MainWindow::MainWindow()
     orbitalView.setShaderProgram(shader);
 
     //TODO: add a menu for these & others
-    loadNetworkFromCSV("resource/networks/GPS.csv");
-    loadNetworkFromCSV("resource/networks/Kuiper_Network.csv");
+    //loadNetworkFromCSV("resource/networks/GPS.csv");
+    //loadNetworkFromCSV("resource/networks/Kuiper_Network.csv");
     loadNetworkFromCSV("resource/networks/Starlink_Network.csv");
+    sim.setTransmissionFreqs(30e9, 12e9);
 }
 
 void MainWindow::createGLWindow()

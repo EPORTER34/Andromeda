@@ -4,7 +4,24 @@
 Simulation::Simulation()
 {
     time = 0;
-    timeStep = 100;
+    timeStep = 10;
+    uplinkFreq = downlinkFreq = 0.0;
+}
+
+double Simulation::getUplinkFreq() const
+{
+    return uplinkFreq;
+}
+
+double Simulation::getDownLinkFreq() const
+{
+    return downlinkFreq;
+}
+
+void Simulation::setTransmissionFreqs(double newUplink, double newDownlink)
+{
+    uplinkFreq = newUplink;
+    downlinkFreq = newDownlink;
 }
 
 void Simulation::runTimeStep()
