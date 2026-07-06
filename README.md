@@ -12,8 +12,8 @@ the attenuation from mean annual global is then approximated with the formula y_
 Notes: <br>
 max frequency is 50 GHz <br>
 
-todo: <br>
-backend: <br>
+## Todo <br>
+### Backend: <br>
   - ground to sat comm <br>
     - link budget analysis <br>
     - path loss/SNR <br>
@@ -21,7 +21,7 @@ backend: <br>
   - link everything together <br>
 <br>
 
-frontend: <br>
+### Frontend: <br>
   - viewing pannels <br>
     - satellite numbers (with dropdown for orbital elements?) <br>
     - doppler effect <br>
@@ -62,7 +62,8 @@ The orbital plane's normal vector is calculated using orbital elements as follow
 The doppler shift is calculated using the following formula:<br>
 >  f<sub>d</sub> = f<sub>c</sub> * v<sub>r</sub> / c <br>
 
-Where v<sub>r</sub> is the radial velocity, calculated by taking the dot product of the satellite velocity and the normalized displacement vector (all in ECEF)
+Where v<sub>r</sub> is the radial velocity, calculated by taking the dot product of the satellite velocity and the normalized displacement vector between the satellite & base station. 
+All calculations are done in ECEF so that only satellite velocity needs to be considered. <br>
 ## Losses <br>
 ### Free Space <br>
 Free space losses are calculated using the following formula: <br>
